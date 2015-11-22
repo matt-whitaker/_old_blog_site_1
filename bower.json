@@ -1,0 +1,24 @@
+{
+  "name": "mw-ng-wordpress",
+  "version": "0.0.0",
+  "authors": [
+    "Matt Whitaker <mattw@slalom.com>"
+  ],
+  "license": "MIT",
+  "ignore": [
+    "**/.*",
+    "node_modules",
+    "bower_components",
+    "test",
+    "tests"
+  ],
+  "dependencies": {
+    "angular": "~1.4.4",
+    "ui-router": "~0.2.15",
+    "lodash": "~3.10.1",
+    "moment": "~2.10.6",
+    "angular-animate": "~1.4.7",
+    "ngScrollSpy": "~1.0.9",
+    "font-awesome": "~4.4.0"
+  }
+}

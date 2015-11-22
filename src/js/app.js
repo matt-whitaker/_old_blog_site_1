@@ -4,6 +4,7 @@ require('./mixins/partitionWithLabel.js');
 
 // services
 require('./services/blogs.js');
+require('./services/pages.js');
 require('./services/taxonomies.js');
 require('./services/templates.js');
 
@@ -35,6 +36,7 @@ angular.module('mw.app',
 
     // services
     'mw.services.blogs',
+    'mw.services.pages',
     'mw.services.taxonomies',
     'mw.services.templates',
 

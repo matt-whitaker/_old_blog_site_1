@@ -2,9 +2,17 @@
 
 angular.module('mw.controllers.home', [])
   .controller('HomeController', [
-    '$scope',
-    function ($scope) {
+    '$scope', 'pagesService',
+    function ($scope, pagesService) {
+      $scope.loaded = false;
 
+      pagesService.findBySlug('home').then(function (page) {
+        if (page) {
+          $scope.loaded = true;
+          $scope.title = page.title;
+          $scope.content = page.content;
+        }
+      });
     }
   ])
   .config(['$stateProvider', function ($stateProvider) {

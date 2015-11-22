@@ -1,1 +1,5 @@
-<p>Hello World, I am home!</p>
+<div class="mw-spinner" ng-if="!loaded"></div>
+<div class="mw-home" ng-if="loaded">
+    <h1>{{title}}</h1>
+    <div class="mw-home-content" mw-bind-html="content"></div>
+</div>

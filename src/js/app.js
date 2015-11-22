@@ -27,41 +27,41 @@ require('./directives/overlay.js');
 require('./directives/charts/test.js');
 
 angular.module('mw.app',
-    [
-        // dependencies
-        'ui.router',
-        'ngAnimate',
-        'ngScrollSpy',
+  [
+    // dependencies
+    'ui.router',
+    'ngAnimate',
+    'ngScrollSpy',
 
-        // services
-        'mw.services.blogs',
-        'mw.services.taxonomies',
-        'mw.services.templates',
+    // services
+    'mw.services.blogs',
+    'mw.services.taxonomies',
+    'mw.services.templates',
 
-        // filters
-        'mw.filters.prettyDate',
-        'mw.filters.prettyMonth',
+    // filters
+    'mw.filters.prettyDate',
+    'mw.filters.prettyMonth',
 
-        // controllers
-        'mw.controllers.home',
-        //'mw.controllers.blogs', // Disable this in favor of Archive list
-        'mw.controllers.archive',
-        'mw.controllers.archive',
-        'mw.controllers.blog', // This one needs to be last!
+    // controllers
+    'mw.controllers.home',
+    //'mw.controllers.blogs', // Disable this in favor of Archive list
+    'mw.controllers.archive',
+    'mw.controllers.archive',
+    'mw.controllers.blog', // This one needs to be last!
 
-        // directives
-        'mw.directives.utils.bindHtml',
-        'mw.directives.utils.toggleLink',
-        'mw.directives.nav',
-        'mw.directives.calendar',
-        'mw.directives.overlay',
-        'mw.directives.charts.test' // Keep this in to fiddle with
-    ])
-    .constant('apiBase', '/wp-json/wp/v2/')
-    .constant('customApiBase', '/wp-json/dt/v1/')
-    .constant('templatesBase', '/wp-content/themes/disjointedthinking/templates/')
-    .config(['$locationProvider', function ($locationProvider) {
-        $locationProvider.html5Mode({
-            enabled: true
-        });
-    }]);
+    // directives
+    'mw.directives.utils.bindHtml',
+    'mw.directives.utils.toggleLink',
+    'mw.directives.nav',
+    'mw.directives.calendar',
+    'mw.directives.overlay',
+    'mw.directives.charts.test' // Keep this in to fiddle with
+  ])
+  .constant('apiBase', '/wp-json/wp/v2/')
+  .constant('customApiBase', '/wp-json/dt/v1/')
+  .constant('templatesBase', '/wp-content/themes/disjointedthinking/templates/')
+  .config(['$locationProvider', function ($locationProvider) {
+    $locationProvider.html5Mode({
+      enabled: true
+    });
+  }]);

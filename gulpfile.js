@@ -200,7 +200,9 @@ gulp.task('clean-all', [
   'clean-images',
   'clean-scripts',
   'clean-templates'
-]);
+], function () {
+  return del([DIST_PATH_ROOT]);
+});
 
 gulp.task('build-all', [
   'build-js',

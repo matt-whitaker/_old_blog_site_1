@@ -1,0 +1,62 @@
+.mw-app {
+  .mw-header-well {
+    .mw-well(20px);
+  }
+  .mw-header-divided {
+    margin-top: 50px;
+  }
+
+  .mw-nav {
+    .mw-header-divided;
+    .mw-header-well;
+
+    .mw-nav-label {
+      font-size: @mw-font-size-2;
+      display: flex;
+      align-items: baseline;
+
+      span {
+        flex-grow: 1;
+      }
+    }
+    
+    .mw-nav-item a {
+      white-space: nowrap;
+      overflow: hidden;
+      text-overflow: ellipsis;
+    }
+
+    .mw-nav-more {
+      text-align: right;
+      cursor: pointer;
+      font-size: small;
+      position: relative;
+      top:1px;
+
+      &:hover {
+        text-decoration: underline;
+      }
+    }
+
+    ul, li {
+      list-style: none;
+      padding: 0;
+      margin: 0;
+    }
+
+    li {
+      margin: 7px 0;
+      border-bottom: 1px dotted @mw-color-tertiary;
+      cursor: pointer;
+
+      &:hover {
+        border-bottom-style: solid;
+      }
+
+      a {
+        display: inline-block;
+        width: 100%;
+      }
+    }
+  }
+}

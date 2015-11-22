@@ -1,0 +1,14 @@
+<div class="mw-spinner" ng-if="!loaded"></div>
+<article class="mw-article" ng-if="loaded"> 
+    <header class="mw-article-header"> 
+        <h1 class="mw-article-title">{{title}}</h1> 
+        <time class="mw-article-date">{{date | prettyDate}}</time> 
+    </header> 
+    <main class="mw-article-content" mw-bind-html="content"> </main>
+    <footer class="mw-article-footer">
+        <div class="mw-article-meta">
+            <span>tags: &nbsp;</span>
+            <span ng-repeat="tag in tags track by $index" alt="{{tag.description}}">{{$index ? ', ' : ''}}{{tag}}</span>
+        </div>
+    </footer>
+</article>

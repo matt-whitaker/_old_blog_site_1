@@ -1,0 +1,50 @@
+.mw-app {
+  @mw-timing: ease;
+  @body-duration: 255ms;
+  @overlay-duration: @body-duration - 20ms;
+
+  .mw-overlay {
+
+  }
+
+  .mw-overlay-background {
+    position: fixed;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+
+    top: 0;
+    left: 0;
+
+    width: 100%;
+    height: 100%;
+
+    background-color: fadeout(#000, 30%);
+
+    opacity: 0;
+    &.mw-enter {
+      opacity: 1;
+      transition: opacity @overlay-duration linear 20ms;
+      //.mw-overlay-container {
+      //
+      //}
+    }
+    .mw-overlay-container {
+      .mw-border-radius;
+      .mw-shadow;
+
+      background-color: @mw-color-tertiary-dark;
+
+      flex-shrink: 1;
+      border: 2px solid mix(@mw-color-secondary, @mw-color-quaternary-dark);
+      padding: 10px;
+
+      //opacity: 0;
+    }
+  }
+
+  &.overlain .mw-wrapper {
+    -webkit-filter: blur(2px);
+    -webkit-transition: -webkit-filter @body-duration ease;
+  }
+}

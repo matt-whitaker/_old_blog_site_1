@@ -1,0 +1,27 @@
+.mw-app {
+  .mw-badge {
+    text-align: center;
+
+    // Need to convert to HTML or SVG
+    svg {
+      .no-select;
+
+      cursor: default;
+      background-color: @mw-white;
+      display: inline-block;
+      .mw-shadow;
+      border-radius: 34px 34px 34px 34px;
+
+      text {
+        fill: @mw-color-tertiary;
+        dominant-baseline: middle;
+        text-anchor: middle;
+        font-family: @mw-font-secondary;
+        font-size: 56px;
+      }
+      text + text {
+        fill: @mw-color-primary;
+      }
+    }
+  }
+}

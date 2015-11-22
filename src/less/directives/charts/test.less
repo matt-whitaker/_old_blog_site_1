@@ -1,0 +1,31 @@
+.mw-app {
+  .mw-chart-test {
+    font-size: @mw-font-size-4;
+    //line-height: 12px;
+
+    display: flex;
+
+    color: @mw-color-secondary;
+
+    .mw-chart-test-well {
+      margin: 0 5px;
+      &:first-of-type {
+        margin-left: 0;
+      }
+      &:last-of-type {
+        margin-right: 0;
+      }
+
+    }
+
+    .mw-chart-test-well-legend {
+      padding: 10px;
+      line-height: 1.2em;
+    }
+
+    .mw-chart-test-well-chart svg {
+      background-color: rgba(255, 255, 255, 0.8);
+      display: block;
+    }
+  }
+}

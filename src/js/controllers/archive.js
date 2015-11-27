@@ -4,6 +4,7 @@ angular.module('mw.controllers.archive', [])
   .controller('ArchiveController', [
     '$scope', 'blogsService',
     function ($scope, blogsService) {
+      $scope.loaded = false;
 
       function buildTree(obj, values) {
         if (!values.length) {
@@ -20,8 +21,11 @@ angular.module('mw.controllers.archive', [])
         return partitioned;
       }
 
+
       blogsService.getArchive()
         .then(function (postsDates) {
+          $scope.loaded = true;
+
           if (!postsDates.length) {
             return;
           }

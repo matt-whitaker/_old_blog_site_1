@@ -1,19 +1,19 @@
 .mw-app {
   .mw-article {
-    margin-top: 20px;
-    margin-bottom: 20px;
+    padding: 20px 0;
 
     .mw-article-header {
       font-size: @mw-font-size-1;
       display: flex;
 
+      // Hack
       margin-top: -20px;
       margin-bottom: -20px;
     }
 
     .mw-article-title {
-      font-size: @mw-font-size-1;
-      line-height: @mw-font-size-1;
+      font-size: @mw-font-size-2;
+      line-height: @mw-font-size-2;
 
       vertical-align: text-bottom;
 
@@ -21,8 +21,8 @@
     }
 
     .mw-article-date {
-      line-height: @mw-font-size-1;
-      height: @mw-font-size-1;
+      line-height: @mw-font-size-2;
+      height: @mw-font-size-2;
 
       text-align: right;
       vertical-align: text-bottom;
@@ -132,6 +132,8 @@
         display: block;
         margin: 20px auto;
       }
+
+      /* End raw elements */
     }
 
     .mw-article-footer {

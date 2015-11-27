@@ -2,32 +2,43 @@
 
 // =========== DEPENDENCIES
 
+// System
+var path        = require('path');
+
+// Utils
 var es          = require('event-stream');
 var prettyJson  = require('prettyjson');
 var through2    = require('through2');
 var del         = require('del');
 var _           = require('lodash');
+var bowerFiles  = require('main-bower-files');
+var argv        = require('yargs').argv;
 
 // Gulp
 var gulp        = require('gulp');
 var flatten     = require('gulp-flatten');
 var browserify  = require('gulp-browserify');
-var rename      = require('gulp-rename');
 var less        = require('gulp-less');
 var template    = require('gulp-template');
-var bowerFiles  = require('main-bower-files');
 var symlink     = require('gulp-sym');
+var uglify      = require('gulp-uglify');
+var gif         = require('gulp-if');
+var rename      = require('gulp-rename');
+var minifyCss   = require('gulp-minify-css');
+
+// Custom
+var angularify   = require('./tasks/angularify.js');
 
 // =========== END DEPENDENCIES
 
 
 
 // =========== ENVIRONMENT
-var env = null;
-try {
-  env           = require('./env.json');
-
-} catch (e) {}
+//var argv = null;
+//try {
+//  env           = require('./env.json');
+//
+//} catch (e) {}
 
 var pkg         = require('./package.json');
 
@@ -131,30 +142,34 @@ gulp.task('clean-js', function () {
 });
 
 gulp.task('build-js', ['clean-js'], function () {
-  var counter = 0;
-  var files = bowerFiles();
-
-  function jsFiles () {
-    return through2.obj(function (file, encoding, cb) {
-      if (_.endsWith(files[counter++], '.js')) {
-        this.push(file);
-      }
-
-      cb();
-    })
-  }
-
   return es.merge(
-    gulp.src(files)
-      .pipe(jsFiles())
+    gulp.src(_.filter(bowerFiles(), function (file) {
+        return _.endsWith(path.basename(file), '.js');
+      }))
       .pipe(flatten())
       .pipe(gulp.dest(JS_DIST_PATH)),
 
-    gulp.src(WORKING_DIRECTORY + JS_SRC_PATH + 'app.js')
+    gulp.src(WORKING_DIRECTORY + JS_SRC_PATH + '**/*.js')
+      .pipe(angularify({
+        root: 'app.js',
+        module: 'mw.app',
+        dependencies: [
+          'ui.router',
+          'ngAnimate',
+          'ngScrollSpy'
+        ]
+      }))
+
       .pipe(browserify({
         insertGlobals : true,
-        debug : env && env.dev
+        debug : !argv.prod
       }))
+
+      // Prod
+      .pipe(gif(argv.prod, rename({ suffix: '.min' })))
+      .pipe(gif(argv.prod, uglify()))
+      // End Prod
+
       .pipe(gulp.dest(JS_DIST_PATH))
   )
 });
@@ -172,12 +187,25 @@ gulp.task('clean-css', function () {
 });
 
 gulp.task('build-css', ['clean-css'], function () {
-  gulp.src(WORKING_DIRECTORY + CSS_SRC_PATH + 'app.less')
+  // TEMP
+  var tmp = es.merge(
+    gulp.src('bower_components/font-awesome/css/font-awesome.css')
+      .pipe(gulp.dest(CSS_DIST_PATH + 'styles/')),
+    gulp.src('bower_components/font-awesome/fonts/**/*')
+      .pipe(gulp.dest(CSS_DIST_PATH + 'fonts/')));
+  // End TEMP
+
+  return es.merge(tmp, gulp.src(WORKING_DIRECTORY + CSS_SRC_PATH + 'app.less')
     .pipe(less({
       paths: [ WORKING_DIRECTORY + CSS_SRC_PATH ]
     }))
     .pipe(rename('style.css'))
-    .pipe(gulp.dest(CSS_DIST_PATH));
+
+    // Prod
+    .pipe(gif(argv.prod, minifyCss()))
+    // End Prod
+
+    .pipe(gulp.dest(CSS_DIST_PATH)))
 });
 
 // =========== END CSS TASKS

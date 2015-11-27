@@ -8,7 +8,7 @@
     <script src="/wp-content/themes/disjointedthinking/js/lodash.js" type="text/javascript"></script>
     <script src="/wp-content/themes/disjointedthinking/js/moment.js" type="text/javascript"></script>
     <script src="/wp-content/themes/disjointedthinking/js/ngScrollSpy.js" type="text/javascript"></script>
-    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.4.0/css/font-awesome.min.css">
+    <link href="/wp-content/themes/disjointedthinking/styles/font-awesome.css" rel="stylesheet" >
     <link href="/wp-content/themes/disjointedthinking/style.css" rel="stylesheet" type="text/css" />
     <base href="/"></base>
     <?php wp_head(); ?>

@@ -187,7 +187,15 @@ gulp.task('clean-css', function () {
 });
 
 gulp.task('build-css', ['clean-css'], function () {
-  gulp.src(WORKING_DIRECTORY + CSS_SRC_PATH + 'app.less')
+  // TEMP
+  var tmp = es.merge(
+    gulp.src('bower_components/font-awesome/css/font-awesome.css')
+      .pipe(gulp.dest(CSS_DIST_PATH + 'styles/')),
+    gulp.src('bower_components/font-awesome/fonts/**/*')
+      .pipe(gulp.dest(CSS_DIST_PATH + 'fonts/')));
+  // End TEMP
+
+  return es.merge(tmp, gulp.src(WORKING_DIRECTORY + CSS_SRC_PATH + 'app.less')
     .pipe(less({
       paths: [ WORKING_DIRECTORY + CSS_SRC_PATH ]
     }))
@@ -197,7 +205,7 @@ gulp.task('build-css', ['clean-css'], function () {
     .pipe(gif(argv.prod, minifyCss()))
     // End Prod
 
-    .pipe(gulp.dest(CSS_DIST_PATH))
+    .pipe(gulp.dest(CSS_DIST_PATH)))
 });
 
 // =========== END CSS TASKS

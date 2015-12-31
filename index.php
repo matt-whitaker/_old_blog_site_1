@@ -6,12 +6,17 @@
     <script type="text/javascript" src="/wp-content/themes/disjointedthinking/js/<%- lib %>"></script>
     <% }); %>
 
-    <link href="/wp-content/themes/disjointedthinking/styles/font-awesome.css" rel="stylesheet" >
+    <link href='https://fonts.googleapis.com/css?family=Lato:400,100,100italic,300,300italic,400italic,700,700italic,900,900italic' rel='stylesheet' type='text/css'>
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.5.0/css/font-awesome.min.css">
     <link href="/wp-content/themes/disjointedthinking/style.css" rel="stylesheet" type="text/css" />
     <base href="/"></base>
     <?php wp_head(); ?>
 </head>
 <body ng-app="mw.app" class="mw-app">
+    <mw-sidebar></mw-sidebar>
+    <mw-page></mw-page>
+
+    <!--
     <div class="mw-wrapper">
         <div class="mw-header">
             <div class="mw-header-container mw-affix">
@@ -32,6 +37,7 @@
             <div ui-view></div>
         </div>
     </div>
+    -->
 
     <script src="/wp-content/themes/disjointedthinking/js/app.js" type="text/javascript"></script>
     <?php

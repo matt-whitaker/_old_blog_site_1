@@ -36,11 +36,6 @@ var bindOutput   = require('./tasks/bindOutput.js');
 
 
 // =========== ENVIRONMENT
-//var argv = null;
-//try {
-//  env           = require('./env.json');
-//
-//} catch (e) {}
 
 var pkg         = require('./package.json');
 
@@ -56,7 +51,7 @@ var WORKING_DIRECTORY = process.cwd() + '/';
 var DIST_PATH_ROOT = 'dist/' + BUILD_NAME + '/';
 
 var IMAGE_SRC_PATH = 'assets/images/';
-var TEMPLATES_SRC_PATH = 'templates/';
+var TEMPLATES_SRC_PATH = 'src/templates/';
 var SCRIPTS_SRC_PATH = 'scripts/';
 var CSS_SRC_PATH = 'src/less/';
 var JS_SRC_PATH = 'src/js/';
@@ -202,15 +197,7 @@ gulp.task('clean-css', function () {
 });
 
 gulp.task('build-css', ['clean-css'], function () {
-  // TEMP
-  var tmp = es.merge(
-    gulp.src('bower_components/font-awesome/css/font-awesome.css')
-      .pipe(gulp.dest(CSS_DIST_PATH + 'styles/')),
-    gulp.src('bower_components/font-awesome/fonts/**/*')
-      .pipe(gulp.dest(CSS_DIST_PATH + 'fonts/')));
-  // End TEMP
-
-  return es.merge(tmp, gulp.src(WORKING_DIRECTORY + CSS_SRC_PATH + 'app.less')
+  return gulp.src(WORKING_DIRECTORY + CSS_SRC_PATH + 'app.less')
     .pipe(less({
       paths: [ WORKING_DIRECTORY + CSS_SRC_PATH ]
     }))
@@ -220,7 +207,7 @@ gulp.task('build-css', ['clean-css'], function () {
     .pipe(gif(argv.prod, minifyCss()))
     // End Prod
 
-    .pipe(gulp.dest(CSS_DIST_PATH)))
+    .pipe(gulp.dest(CSS_DIST_PATH))
 });
 
 // =========== END CSS TASKS
@@ -269,6 +256,7 @@ gulp.task('watch-all', ['build-all'], function () {
   gulp.watch(WORKING_DIRECTORY + IMAGE_SRC_PATH + '**/*', ['build-images']);
   gulp.watch(WORKING_DIRECTORY + SCRIPTS_SRC_PATH + '**/*.php', ['build-scripts']);
   gulp.watch(WORKING_DIRECTORY + TEMPLATES_SRC_PATH + '**/*', ['build-templates']);
+  gulp.watch(WORKING_DIRECTORY + 'index.php', ['build-index']);
 });
 
 gulp.task('default', ['build-app', 'build-link', 'watch-all']);

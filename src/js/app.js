@@ -8,8 +8,5 @@ angular.module('mw.app')
     });
   }])
   .run(function () {
-    (window.onresize = function () {
-      var mainElem = document.getElementsByClassName('mw-main')[0];
-      mainElem.style.minHeight = document.documentElement.clientHeight + 'px';
-    })();
+
   });

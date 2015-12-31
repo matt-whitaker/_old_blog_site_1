@@ -2,12 +2,10 @@
 <html>
 <head>
     <title>Matt Whitaker's Blog</title>
-    <script src="/wp-content/themes/disjointedthinking/js/angular.js" type="text/javascript"></script>
-    <script src="/wp-content/themes/disjointedthinking/js/angular-ui-router.js" type="text/javascript"></script>
-    <script src="/wp-content/themes/disjointedthinking/js/angular-animate.js" type="text/javascript"></script>
-    <script src="/wp-content/themes/disjointedthinking/js/lodash.js" type="text/javascript"></script>
-    <script src="/wp-content/themes/disjointedthinking/js/moment.js" type="text/javascript"></script>
-    <script src="/wp-content/themes/disjointedthinking/js/ngScrollSpy.js" type="text/javascript"></script>
+    <% _.each(JS.LIBS || [], function (lib) { %>
+    <script type="text/javascript" src="/wp-content/themes/disjointedthinking/js/<%- lib %>"></script>
+    <% }); %>
+
     <link href="/wp-content/themes/disjointedthinking/styles/font-awesome.css" rel="stylesheet" >
     <link href="/wp-content/themes/disjointedthinking/style.css" rel="stylesheet" type="text/css" />
     <base href="/"></base>

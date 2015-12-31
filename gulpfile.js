@@ -13,6 +13,7 @@ var del         = require('del');
 var _           = require('lodash');
 var bowerFiles  = require('main-bower-files');
 var argv        = require('yargs').argv;
+var sequence    = require('run-sequence');
 
 // Gulp
 var gulp        = require('gulp');
@@ -28,6 +29,7 @@ var minifyCss   = require('gulp-minify-css');
 
 // Custom
 var angularify   = require('./tasks/angularify.js');
+var bindOutput   = require('./tasks/bindOutput.js');
 
 // =========== END DEPENDENCIES
 
@@ -70,26 +72,38 @@ var WP_THEME_PATH  = 'wordpress/wp-content/themes/' + BUILD_NAME + '/';
 // =========== END PATHS
 
 
+var TEMPLATE_VM = { JS: {}, CSS: {} };
+
+// =========== INDEX TASKS
+
+gulp.task('clean-index', function () {
+  return del([
+    DIST_PATH_ROOT + 'index.php'
+  ])
+});
+
+gulp.task('build-index', function () {
+  return gulp.src(WORKING_DIRECTORY + 'index.php')
+    .pipe(template(TEMPLATE_VM))
+    .pipe(gulp.dest(DIST_PATH_ROOT));
+});
+
+// =========== END INDEX TASKS
+
+
 
 // =========== TEMPLATE TASKS
 
 gulp.task('clean-templates', function () {
   return del([
-    DIST_PATH_ROOT + '**/index.php',
     TEMPLATES_DIST_PATH + '**/*.html',
     TEMPLATES_DIST_PATH
   ]);
 });
 
 gulp.task('build-templates', ['clean-templates'], function () {
-  return es.merge(
-    gulp.src(WORKING_DIRECTORY + 'index.php')
-      .pipe(template(pkg.build))
-      .pipe(gulp.dest(DIST_PATH_ROOT)),
-
-    gulp.src(WORKING_DIRECTORY + TEMPLATES_SRC_PATH + '**')
-      .pipe(gulp.dest(TEMPLATES_DIST_PATH))
-  );
+  return gulp.src(WORKING_DIRECTORY + TEMPLATES_SRC_PATH + '**')
+    .pipe(gulp.dest(TEMPLATES_DIST_PATH))
 });
 
 // =========== END TEMPLATES TASKS
@@ -147,6 +161,7 @@ gulp.task('build-js', ['clean-js'], function () {
         return _.endsWith(path.basename(file), '.js');
       }))
       .pipe(flatten())
+      .pipe(bindOutput(TEMPLATE_VM.JS, 'LIBS'))
       .pipe(gulp.dest(JS_DIST_PATH)),
 
     gulp.src(WORKING_DIRECTORY + JS_SRC_PATH + '**/*.js')
@@ -232,23 +247,28 @@ gulp.task('clean-all', [
   return del([DIST_PATH_ROOT]);
 });
 
-gulp.task('build-all', [
-  'build-js',
-  'build-css',
-  'build-images',
-  'build-scripts',
-  'build-templates'
-]);
+gulp.task('build-all', function () {
+  return sequence(
+    [
+      'build-js',
+      'build-css',
+      'build-images',
+      'build-scripts',
+      'build-templates'
+    ],
+    'build-index'
+  )
+});
+
+gulp.task('build-app', ['build-all']);
+
 
 gulp.task('watch-all', ['build-all'], function () {
   gulp.watch(WORKING_DIRECTORY + JS_SRC_PATH + '**/*.js', ['build-js']);
   gulp.watch(WORKING_DIRECTORY + CSS_SRC_PATH + '**/*.less', ['build-css']);
   gulp.watch(WORKING_DIRECTORY + IMAGE_SRC_PATH + '**/*', ['build-images']);
   gulp.watch(WORKING_DIRECTORY + SCRIPTS_SRC_PATH + '**/*.php', ['build-scripts']);
-  gulp.watch([
-    WORKING_DIRECTORY + TEMPLATES_SRC_PATH + '**/*',
-    WORKING_DIRECTORY + 'index.php'
-  ], ['build-templates']);
+  gulp.watch(WORKING_DIRECTORY + TEMPLATES_SRC_PATH + '**/*', ['build-templates']);
 });
 
-gulp.task('default', ['build-all', 'build-link', 'watch-all']);
+gulp.task('default', ['build-app', 'build-link', 'watch-all']);

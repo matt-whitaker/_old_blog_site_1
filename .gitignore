@@ -5,3 +5,4 @@ bower_components
 dist
 wordpress
 env.json
+backup/

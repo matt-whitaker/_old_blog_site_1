@@ -1,6 +1,6 @@
 "use strict";
 
-angular.module('mw.controllers.archive', [])
+angular.module('mw.archive.archive', [])
   .controller('ArchiveController', [
     '$scope', 'blogsService',
     function ($scope, blogsService) {
@@ -42,12 +42,12 @@ angular.module('mw.controllers.archive', [])
     $stateProvider
       .state('archive', {
         url: "/archive/",
-        templateUrl: "/wp-content/themes/disjointedthinking/templates/views/archive.html",
+        templateUrl: "/wp-content/themes/disjointedthinking/templates/archive.html",
         controller: "ArchiveController"
       })
       .state('archive.month', {
         url: "{year}/{month}",
-        templateUrl: "/wp-content/themes/disjointedthinking/templates/views/archive.html",
+        templateUrl: "/wp-content/themes/disjointedthinking/templates/archive.html",
         controller: "ArchiveController"
       });
   }]);

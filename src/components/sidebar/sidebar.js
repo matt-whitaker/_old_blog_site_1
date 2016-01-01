@@ -1,6 +1,6 @@
 "use strict";
 
-angular.module('mw.directives.sidebar', [])
+angular.module('mw.sidebar.sidebar', [])
 
   .directive('mwSidebar', [
     '$q', '$http', 'templatesBase', 'blogsService',
@@ -8,7 +8,7 @@ angular.module('mw.directives.sidebar', [])
       return {
         restrict: 'E',
         scope: {},
-        templateUrl: templatesBase + 'directives/sidebar.html',
+        templateUrl: templatesBase + 'sidebar.html',
         link: function (scope, elem, attrs) {
           elem.addClass('mw-sidebar');
         }

@@ -1,6 +1,6 @@
 "use strict";
 
-angular.module('mw.controllers.blogs', [])
+angular.module('mw.blogs.blogs', [])
   .controller('BlogsController', [
     '$scope', '$state', '$sce', 'blogsService',
     function ($scope, $state, $sce, blogsService) {
@@ -27,7 +27,7 @@ angular.module('mw.controllers.blogs', [])
     $stateProvider
     .state('blogs', {
       url: "/blogs/",
-      templateUrl: "/wp-content/themes/disjointedthinking/templates/views/blogs.html",
+      templateUrl: "/wp-content/themes/disjointedthinking/templates/blogs.html",
       controller: 'BlogsController'
     })
   }]);

@@ -1,6 +1,6 @@
 "use strict";
 
-angular.module('mw.controllers.home', [])
+angular.module('mw.home.home', [])
   .controller('HomeController', [
     '$scope', 'pagesService',
     function ($scope, pagesService) {
@@ -19,7 +19,7 @@ angular.module('mw.controllers.home', [])
     $stateProvider
     .state('home', {
       url: "/",
-      templateUrl: "/wp-content/themes/disjointedthinking/templates/views/home.html",
+      templateUrl: "/wp-content/themes/disjointedthinking/templates/home.html",
       controller: "HomeController"
     });
   }]);

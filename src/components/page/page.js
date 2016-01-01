@@ -1,16 +1,16 @@
 "use strict";
 
-angular.module('mw.directives.nav-category', [])
+angular.module('mw.page.page', [])
 
-  .directive('mwNavCategory', [
+  .directive('mwPage', [
     '$q', '$http', 'templatesBase',
     function ($q, $http, templatesBase) {
       return {
         restrict: 'E',
         scope: {},
-        templateUrl: templatesBase + 'directives/nav-category.html',
+        templateUrl: templatesBase + 'page.html',
         link: function (scope, elem, attrs) {
-          elem.addClass('mw-nav-category');
+          elem.addClass('mw-page');
         }
       }
     }

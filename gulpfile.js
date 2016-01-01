@@ -51,14 +51,18 @@ var WORKING_DIRECTORY = process.cwd() + '/';
 var DIST_PATH_ROOT = 'dist/' + BUILD_NAME + '/';
 
 var IMAGE_SRC_PATH = 'assets/images/';
-var TEMPLATES_SRC_PATH = 'src/templates/';
 var SCRIPTS_SRC_PATH = 'scripts/';
-var CSS_SRC_PATH = 'src/less/';
+
+var COMPONENTS_SRC_PATH = 'src/components/';
+var VIEWS_SRC_PATH = 'src/views/';
+var TEMPLATES_SRC_PATH = 'src/templates/';
+var LESS_SRC_PATH = 'src/less/';
 var JS_SRC_PATH = 'src/js/';
 
 var IMAGE_DIST_PATH = DIST_PATH_ROOT + 'images/';
-var TEMPLATES_DIST_PATH = DIST_PATH_ROOT + 'templates/';
 var SCRIPTS_DIST_PATH = DIST_PATH_ROOT;
+
+var TEMPLATES_DIST_PATH = DIST_PATH_ROOT + 'templates/';
 var CSS_DIST_PATH = DIST_PATH_ROOT;
 var JS_DIST_PATH = DIST_PATH_ROOT + 'js/';
 
@@ -97,8 +101,13 @@ gulp.task('clean-templates', function () {
 });
 
 gulp.task('build-templates', ['clean-templates'], function () {
-  return gulp.src(WORKING_DIRECTORY + TEMPLATES_SRC_PATH + '**')
-    .pipe(gulp.dest(TEMPLATES_DIST_PATH))
+  return gulp.src([
+    WORKING_DIRECTORY + TEMPLATES_SRC_PATH + '**/*.html',
+    WORKING_DIRECTORY + COMPONENTS_SRC_PATH + '**/*.html',
+    WORKING_DIRECTORY + VIEWS_SRC_PATH + '**/*.html'
+  ])
+  .pipe(flatten())
+  .pipe(gulp.dest(TEMPLATES_DIST_PATH))
 });
 
 // =========== END TEMPLATES TASKS
@@ -159,7 +168,11 @@ gulp.task('build-js', ['clean-js'], function () {
       .pipe(bindOutput(TEMPLATE_VM.JS, 'LIBS'))
       .pipe(gulp.dest(JS_DIST_PATH)),
 
-    gulp.src(WORKING_DIRECTORY + JS_SRC_PATH + '**/*.js')
+    gulp.src([
+      WORKING_DIRECTORY + JS_SRC_PATH + '**/*.js',
+      WORKING_DIRECTORY + COMPONENTS_SRC_PATH + '**/*.js',
+      WORKING_DIRECTORY + VIEWS_SRC_PATH + '**/*.js'
+    ])
       .pipe(angularify({
         root: 'app.js',
         module: 'mw.app',
@@ -197,9 +210,13 @@ gulp.task('clean-css', function () {
 });
 
 gulp.task('build-css', ['clean-css'], function () {
-  return gulp.src(WORKING_DIRECTORY + CSS_SRC_PATH + 'app.less')
+  return gulp.src(WORKING_DIRECTORY + LESS_SRC_PATH + 'app.less')
     .pipe(less({
-      paths: [ WORKING_DIRECTORY + CSS_SRC_PATH ]
+      paths: [
+        WORKING_DIRECTORY + LESS_SRC_PATH,
+        WORKING_DIRECTORY + COMPONENTS_SRC_PATH,
+        WORKING_DIRECTORY + VIEWS_SRC_PATH
+      ]
     }))
     .pipe(rename('style.css'))
 
@@ -251,12 +268,29 @@ gulp.task('build-app', ['build-all']);
 
 
 gulp.task('watch-all', ['build-all'], function () {
-  gulp.watch(WORKING_DIRECTORY + JS_SRC_PATH + '**/*.js', ['build-js']);
-  gulp.watch(WORKING_DIRECTORY + CSS_SRC_PATH + '**/*.less', ['build-css']);
+  gulp.watch([
+    WORKING_DIRECTORY + JS_SRC_PATH + '**/*.js',
+    WORKING_DIRECTORY + COMPONENTS_SRC_PATH + '**/*.js',
+    WORKING_DIRECTORY + VIEWS_SRC_PATH + '**/*.js'
+  ], ['build-js']);
+
+  gulp.watch([
+    WORKING_DIRECTORY + LESS_SRC_PATH + '**/*.less',
+    WORKING_DIRECTORY + COMPONENTS_SRC_PATH + '**/*.less',
+    WORKING_DIRECTORY + VIEWS_SRC_PATH + '**/*.less'
+  ], ['build-css']);
+
+  gulp.watch([
+    WORKING_DIRECTORY + TEMPLATES_SRC_PATH + '**/*.html',
+    WORKING_DIRECTORY + COMPONENTS_SRC_PATH + '**/*.html',
+    WORKING_DIRECTORY + VIEWS_SRC_PATH + '**/*.html'
+  ], ['build-templates']);
+
   gulp.watch(WORKING_DIRECTORY + IMAGE_SRC_PATH + '**/*', ['build-images']);
   gulp.watch(WORKING_DIRECTORY + SCRIPTS_SRC_PATH + '**/*.php', ['build-scripts']);
-  gulp.watch(WORKING_DIRECTORY + TEMPLATES_SRC_PATH + '**/*', ['build-templates']);
+
   gulp.watch(WORKING_DIRECTORY + 'index.php', ['build-index']);
 });
 
 gulp.task('default', ['build-app', 'build-link', 'watch-all']);
+gulp.task('build', ['build-app', 'build-link']);

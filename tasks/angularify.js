@@ -26,13 +26,22 @@ module.exports = function angularify (config) {
   var appFile;
 
   return through2.obj(function (file, encoding, cb) {
+    var isComponent = file.path.indexOf('/components') > -1;
+    var isView = file.path.indexOf('/views') > -1;
+
     var relativePath = file.path.replace(file.base, '');
     var moduleName = 'mw.{0}'.format(relativePath.replace('.js', '').split(path.sep).join('.'));
 
     if (relativePath === config.root) {
       appFile = file;
     } else {
-      requires.appendLine("require('./{0}');".format(relativePath));
+      if (isComponent) {
+        requires.appendLine("require('../components/{0}');".format(relativePath));
+      } else if (isView) {
+        requires.appendLine("require('../views/{0}');".format(relativePath));
+      } else {
+        requires.appendLine("require('./{0}');".format(relativePath));
+      }
 
       if (moduleName.indexOf('mixins') === -1) {
         modules.appendLine(',');

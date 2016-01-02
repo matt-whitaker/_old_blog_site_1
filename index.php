@@ -12,7 +12,8 @@
     <base href="/"></base>
     <?php wp_head(); ?>
 </head>
-<body ng-app="mw.app" class="mw-app">
+<body ng-app="mw.app" class="mw-app" ng-class="{ 'sidebar-active': sidebar.active }">
+    <mw-toolbar></mw-toolbar>
     <mw-sidebar></mw-sidebar>
     <mw-page></mw-page>
 

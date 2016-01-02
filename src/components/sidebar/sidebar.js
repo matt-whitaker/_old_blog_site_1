@@ -11,6 +11,8 @@ angular.module('mw.sidebar.sidebar', [])
         templateUrl: templatesBase + 'sidebar.html',
         link: function (scope, elem, attrs) {
           elem.addClass('mw-sidebar');
+
+          scope.loading = {};
         }
       }
     }

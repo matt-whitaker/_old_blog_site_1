@@ -2,10 +2,18 @@
 .mw-page {
   display: block;
   margin-left: 0;
-  margin-right: @mw-sidebar-width;
-  border-right: 1px solid @mw-color-lines;
+
+  margin-right: 0;
+  transition: margin-right 100ms linear;
+  .sidebar-active & {
+    margin-right: @mw-sidebar-width;
+  }
 
   .container {
     padding: 30px;
+  }
+
+  li {
+    white-space: normal;
   }
 }

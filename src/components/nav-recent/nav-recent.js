@@ -2,15 +2,23 @@
 
 angular.module('mw.nav-recent.nav-recent', [])
 
-  .directive('mwNavRecent', [
-    '$q', '$http', 'templatesBase',
-    function ($q, $http, templatesBase) {
+  .directive('navRecent', [
+    '$q', '$http', 'templatesBase', 'blogsService',
+    function ($q, $http, templatesBase, blogsService) {
       return {
         restrict: 'E',
-        scope: {},
         templateUrl: templatesBase + 'nav-recent.html',
         link: function (scope, elem, attrs) {
           elem.addClass('mw-nav-recent');
+
+          scope.loading.recent = true;
+          blogsService.getRecent()
+            .then(function (recent) {
+              scope.loading.recent = false;
+              scope.recent = recent;
+            }, function () {
+              scope.loading.recent = false;
+            })
         }
       }
     }

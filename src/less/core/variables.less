@@ -1,11 +1,47 @@
 @mw-font-primary: "Lato", sans-serif;
 @mw-font-secondary: "Questrial", sans-serif;
 
-@mw-color-lines: darken(#fff, 10%);
+@mw-color-white: #ffffff;
+@mw-color-black: #111111;
+
+// color swatch anchored on #71655e
+// http://paletton.com/#uid=30m0u0k5oeb3kpl4vjB6g6Xfd6Y
+
+@mw-color-swatch-1-1: #71655e;
+@mw-color-swatch-1-light-1: #9C8E86;
+@mw-color-swatch-1-light-2: #CABDB5;
+@mw-color-swatch-1-dark-1: #37312D;
+@mw-color-swatch-1-dark-2: #37271D;
+
+@mw-color-swatch-2-1: #3F444A;
+@mw-color-swatch-2-light-1: #595F67;
+@mw-color-swatch-2-light-2: #787D84;
+@mw-color-swatch-2-dark-1: #1E2124;
+@mw-color-swatch-2-dark-2: #151B24;
+
+@mw-color-swatch-3-1: #566151;
+@mw-color-swatch-3-light-1: #798673;
+@mw-color-swatch-3-light-2: #A1AE9C;
+@mw-color-swatch-3-dark-1: #293026;
+@mw-color-swatch-3-dark-2: #203019;
+
+@mw-color-shadow: average(@mw-color-white, @mw-color-black);
 
 @mw-desktop: ~"(min-width: 700px)";
 @mw-mobile: ~"(max-width: 700px)";
 
 @theme-root: "/wp-content/themes/disjointedthinking/";
+
+@background-image-url-1: 'images/transparent-square-tiles.png';
+@background-image-1: url("@{theme-root}@{background-image-url-1}");
+
+@background-image-url-2: 'images/black-linen.png';
+@background-image-2: url("@{theme-root}@{background-image-url-2}");
+
+@background-color: @mw-color-swatch-1-dark-1;
+@background-image: @background-image-2;
+
+@sidebar-background-color: @mw-color-white;
+@sidebar-background-image: @background-image-1;
 
 @mw-sidebar-width: 300px;

@@ -6,7 +6,24 @@ angular.module('mw.app')
     $locationProvider.html5Mode({
       enabled: true
     });
-  }])
-  .run(function () {
 
-  });
+    window.Dev = {};
+  }])
+  .run(['$rootScope', function ($rootScope) {
+    // configs
+    angular.extend($rootScope, {
+      toolbar: {
+        active: true
+      },
+      page: {
+
+      },
+      sidebar: {
+        active: true
+      }
+    })
+    ;
+    $rootScope.toggleSidebar = function (toggle) {
+      $rootScope.sidebar.active = toggle;
+    }
+  }]);

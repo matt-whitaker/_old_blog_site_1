@@ -42,20 +42,30 @@ angular.module('mw.services.blogs', [])
             });
         },
 
-        getArchive: function () {
+        getArchive: function (year, month) {
           return this.$http.get(this.customApiBase + 'archive', { cache: true })
             .then(function (result) {
               var posts = result.data;
-              return posts.length ? _.map(posts, function (datum) {
-                return {
-                  moment: moment(""+datum.year+"-"+datum.month+"-"+datum.day, "YYYY-MM-DD"),
-                  year: datum.year,
-                  month: datum.month,
-                  day: datum.day,
-                  title: datum.title,
-                  name: datum.name
-                };
-              }) : [];
+              return posts.length ? _(posts)
+                .select(function (datum) {
+                  if (year && month) {
+                    return datum.year === year && datum.month === month;
+                  } else if (year) {
+                    return datum.year === year;
+                  } else {
+                    return true;
+                  }
+                })
+                .map(function (datum) {
+                  return {
+                    moment: moment(""+datum.year+"-"+datum.month+"-"+datum.day, "YYYY-MM-DD"),
+                    year: datum.year,
+                    month: datum.month,
+                    day: datum.day,
+                    title: datum.title,
+                    name: datum.name
+                  };
+                }) : [];
             });
         },
 

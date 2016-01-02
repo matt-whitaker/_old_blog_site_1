@@ -182,11 +182,14 @@ gulp.task('build-js', ['clean-js'], function () {
           'ngScrollSpy'
         ]
       }))
-
       .pipe(browserify({
         insertGlobals : true,
         debug : !argv.prod
       }))
+      .on('error', function (error) {
+        console.log(error.toString());
+        this.emit('end');
+      })
 
       // Prod
       .pipe(gif(argv.prod, rename({ suffix: '.min' })))
@@ -218,6 +221,10 @@ gulp.task('build-css', ['clean-css'], function () {
         WORKING_DIRECTORY + VIEWS_SRC_PATH
       ]
     }))
+    .on('error', function (error) {
+      console.log(error.toString());
+      this.emit('end');
+    })
     .pipe(rename('style.css'))
 
     // Prod

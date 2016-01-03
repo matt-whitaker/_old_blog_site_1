@@ -83,7 +83,8 @@ angular.module('mw.services.blogs', [])
                     month: datum.month,
                     day: datum.day,
                     title: datum.title,
-                    name: datum.name
+                    name: datum.name,
+                    excerpt: datum.excerpt
                   };
                 }).value() : [];
             });

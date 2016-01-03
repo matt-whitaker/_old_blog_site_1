@@ -10,7 +10,7 @@ function get_archive($data) {
         return array(
             title       => $item->title,
             name        => $item->name,
-            content     => $item->content,
+            excerpt     => $item->excerpt,
             year        => intval($item->year),
             month       => intval($item->month),
             day         => intval($item->day)
@@ -21,7 +21,7 @@ function get_archive($data) {
     $results = $wpdb->get_results("
         SELECT  p.post_title title,
                 p.post_name name,
-                p.post_content content,
+                p.post_excerpt excerpt,
                 YEAR(p.post_date) year,
                 MONTH(p.post_date) month,
                 DAY(p.post_date) day

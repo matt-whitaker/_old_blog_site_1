@@ -1,21 +1,28 @@
-<mw-loader loaded="loaded"></mw-loader>
-<div class="mw-archive" ng-if="loaded">
-    <h1>Archive</h1>
-    <br />
-    <ul class="mw-year-list">
-        <li ng-repeat="yearGroup in archive" class="mw-year" ng-class="{ first: $first }">
-            <h2><hr/><span>{{yearGroup.label}}</span><hr/></h2>
-            <ul class="mw-month-list">
-                <li ng-repeat="monthGroup in yearGroup" class="mw-month" ng-class="{ first: $first }">
-                    <h3>{{monthLabel(monthGroup.label)}}</h3>
-                    <ul>
-                        <li ng-repeat="post in monthGroup" class="mw-post">
-                            <span class="mw-post-day">{{post.day}}</span>
-                            <a ui-sref="blog({ slug: post.name })">{{post.title}}</a>
-                        </li>
-                    </ul>
-                </li>
-            </ul>
-        </li>
-    </ul>
-</div>
+<article class="mw-blogs-archive" ng-if="loaded">
+    <header>
+        <div class="header-row">
+            <h1>{{ moment | prettyMonth }} {{ year }}</h1>
+        </div>
+    </header>
+    <main>
+        <section class="archi" ng-repeat="model in models">
+            <a ui-sref="blog({ slug: model.name })">
+                <div class="calendar-cell">
+                    <span class="day-num">{{ model.day }}</span>
+                    <i class="fa fa-calendar-o fa-2x"></i>
+                </div>
+                <div class="detail-cell">
+                    <h2>{{ model.title }}&nbsp;</h2>
+                    <p>
+                        {{ model.excerpt }}
+                    </p>
+                </div>
+            </a>
+        </section>
+    </main>
+    <!--<footer>-->
+        <!--<span>tags : </span>-->
+        <!--<span class="fa fa-tag delimiter" ng-if="$index" ng-repeat-start="tag in model.tags track by $index"></span>-->
+        <!--<span alt="{{ tag.description }}" ng-repeat-end>{{ tag }}</span>-->
+    <!--</footer>-->
+</article>

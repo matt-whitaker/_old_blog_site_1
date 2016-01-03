@@ -32,29 +32,49 @@ angular.module('mw.services.blogs', [])
           return this.$http.get(this.customApiBase + 'posts/recent', { cache: true })
             .then(function (result) {
               var posts = result.data;
-              return posts.length ? _.map(posts, function (post) {
-                return {
-                  title: post.post_title,
-                  name: post.post_name,
-                  moment: moment(post.post_date, "YYYY-MM-DD HH:MM:SS")
-                }
-              }) : [];
+              return posts.length ? _(posts)
+                .take(4)
+                .map(function (post) {
+                  return {
+                    title: post.post_title,
+                    name: post.post_name,
+                    moment: moment(post.post_date, "YYYY-MM-DD HH:MM:SS")
+                  }
+                }).value() : [];
+            });
+        },
+
+        getArchiveMonths: function () {
+          return this.$http.get(this.customApiBase + 'archive/months', { cache: true })
+            .then(function (result) {
+              var dates = result.data;
+
+              return dates.length ? _(dates)
+                .map(function (date) {
+                  return {
+                    year: date.year,
+                    month: date.month,
+                    moment: moment(date.year + "-" + date.month, 'YYYY-MM')
+                  };
+                })
+                .value() : [];
             });
         },
 
         getArchive: function (year, month) {
-          return this.$http.get(this.customApiBase + 'archive', { cache: true })
+          if (!parseInt(year) || !parseInt(month)) {
+            throw("Must provide year and month");
+          }
+
+          year = parseInt(year);
+          month = parseInt(month);
+
+          return this.$http.get(this.customApiBase + 'archive', { cache: true, params: { year: year, month: month } })
             .then(function (result) {
               var posts = result.data;
               return posts.length ? _(posts)
                 .select(function (datum) {
-                  if (year && month) {
-                    return datum.year === year && datum.month === month;
-                  } else if (year) {
-                    return datum.year === year;
-                  } else {
-                    return true;
-                  }
+                  return datum.year === year && datum.month === month;
                 })
                 .map(function (datum) {
                   return {
@@ -65,7 +85,7 @@ angular.module('mw.services.blogs', [])
                     title: datum.title,
                     name: datum.name
                   };
-                }) : [];
+                }).value() : [];
             });
         },
 

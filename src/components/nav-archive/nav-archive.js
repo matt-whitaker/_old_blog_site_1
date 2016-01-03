@@ -12,16 +12,11 @@ angular.module('mw.nav-archive.nav-archive', [])
           elem.addClass('mw-nav-archive');
 
           scope.loading.archive = true;
-          blogsService.getArchive()
+          blogsService.getArchiveMonths()
             .then(function (archive) {
               scope.loading.archive = false;
 
-              // TODO:  archive request response will differ
-              return _(archive)
-                .unique(true, function (archi) {
-                  return archi.year + '-' + archi.month;
-                }).value();
-
+              return archive;
             }, function () {
               scope.loading.archive = false;
             })

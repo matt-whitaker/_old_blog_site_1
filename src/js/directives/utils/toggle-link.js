@@ -1,6 +1,6 @@
 "use strict";
 
-angular.module('mw.directives.utils.toggleLink', [])
+angular.module('mw.directives.utils.toggle-link', [])
   .directive('mwToggleLink', ['$compile', function ($compile) {
     return {
       restrict: 'C',

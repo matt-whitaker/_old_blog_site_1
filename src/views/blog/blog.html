@@ -1,33 +1,17 @@
 <article class="mw-blog" ng-if="loaded">
     <header>
         <div class="header-row">
-            <h1>{{ title }}</h1>
+            <h1>{{ model.title }}</h1>
         </div>
         <div class="header-row">
-            <time>{{ date | prettyDate }}</time>
+            <time>{{ model.date | prettyDate }}</time>
             <div>by {{ 'Matt Whitaker' }}</div>
         </div>
     </header>
-    <main class="mw-blog-content mw-post" mw-bind-html="content"></main>
+    <main class="mw-blog-content mw-post" mw-bind-html="model.content"></main>
     <footer>
         <span>tags : </span>
-        <span class="fa fa-tag delimiter" ng-if="$index" ng-repeat-start="tag in tags track by $index"></span>
+        <span class="fa fa-tag delimiter" ng-if="$index" ng-repeat-start="tag in model.tags track by $index"></span>
         <span alt="{{ tag.description }}" ng-repeat-end>{{ tag }}</span>
     </footer>
 </article>
-
-<!--<loader loaded="loaded"></loader>-->
-<!--<article class="mw-blog" ng-if="loaded"> -->
-    <!-- -->
-    <!--&lt;!&ndash;<header class="mw-blog-header"> &ndash;&gt;-->
-        <!--&lt;!&ndash;<h1 class="mw-blog-title">{{ title }}</h1> &ndash;&gt;-->
-        <!--&lt;!&ndash;<time class="mw-blog-date">{{ date | prettyDate }}</time> &ndash;&gt;-->
-    <!--&lt;!&ndash;</header> &ndash;&gt;-->
-    <!--&lt;!&ndash;<main class="mw-blog-content mw-post" mw-bind-html="content"> </main>&ndash;&gt;-->
-    <!--&lt;!&ndash;<footer class="mw-blog-footer">&ndash;&gt;-->
-        <!--&lt;!&ndash;<div class="mw-blog-meta">&ndash;&gt;-->
-            <!--&lt;!&ndash;<span>tags: &nbsp;</span>&ndash;&gt;-->
-            <!--&lt;!&ndash;<span ng-repeat="tag in tags track by $index" alt="{{tag.description}}">{{ $index ? ', ' : '' }}{{ tag }}</span>&ndash;&gt;-->
-        <!--&lt;!&ndash;</div>&ndash;&gt;-->
-    <!--&lt;!&ndash;</footer>&ndash;&gt;-->
-<!--</article>-->

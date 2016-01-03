@@ -9,12 +9,15 @@ angular.module('mw.blog.blog', [])
       blogsService.findBySlug($state.params.slug).then(function (blog) {
         if (blog) {
           $scope.loaded = true;
-          $scope.title = blog.title;
-          $scope.date = blog.moment;
-          $scope.content = blog.content;
-          $scope.tags = _.map(blog.tags, function (tag) {
-            return tag.name;
-          });
+
+          $scope.model = {
+            title: blog.title,
+            date: blog.moment,
+            content: blog.content,
+            tags: _.map(blog.tags, function (tag) {
+              return tag.name;
+            })
+          };
         }
       });
     }

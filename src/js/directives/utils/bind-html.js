@@ -1,6 +1,6 @@
 "use strict";
 
-angular.module('mw.directives.utils.bindHtml', [])
+angular.module('mw.directives.utils.bind-html', [])
   .directive('mwBindHtml', ['$compile', function ($compile) {
     return {
       restrict: 'A',

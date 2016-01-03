@@ -13,7 +13,7 @@ angular.module('mw.app')
     // configs
     angular.extend($rootScope, {
       toolbar: {
-        active: true
+        active: false
       },
       page: {
 

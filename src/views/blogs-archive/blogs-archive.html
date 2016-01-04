@@ -1,7 +1,10 @@
-<article class="mw-blogs-archive" ng-if="loaded">
+<article class="mw-blogs-archive" ng-if="!loading">
     <header>
         <div class="header-row">
-            <h1>{{ moment | prettyMonth }} {{ year }}</h1>
+            <h1>Archive</h1>
+        </div>
+        <div class="header-row">
+            <time>{{ moment | prettyMonth }} {{ year }}</time>
         </div>
     </header>
     <main>

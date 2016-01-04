@@ -11,9 +11,9 @@
   }
 
   a {
-    display: flex;
+    display: block;
     margin: 15px 0;
-
+    position: relative;
     .mw-highlight-2;
   }
 
@@ -23,16 +23,21 @@
     flex-basis: 100px;
   }
 
+  h2, p {
+    margin: 15px 0;
+  }
+
   .detail-cell {
-    flex-basis: 90%;
   }
 
   .calendar-cell {
-    position: relative;
-    align-self: center;
-    text-align: center;
+    position: absolute;
 
-    flex-basis: 10%;
+    top: 50%;
+    transform: translateY(-50%);
+    width: 100px;
+    text-align: center;
+    left: -100px;
   }
 
   .day-num {

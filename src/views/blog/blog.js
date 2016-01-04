@@ -2,13 +2,15 @@
 
 angular.module('mw.blog.blog', [])
   .controller('BlogController', [
-    '$scope', '$state', '$sce', '$compile', 'blogsService',
-    function ($scope, $state, $sce, $compile, blogsService) {
-      $scope.loaded = false;
+    '$rootScope', '$scope', '$state', '$sce', '$compile', 'blogsService',
+    function ($rootScope, $scope, $state, $sce, $compile, blogsService) {
+      $scope.loading = true;
+      $rootScope.$emit('loading', true);
 
       blogsService.findBySlug($state.params.slug).then(function (blog) {
         if (blog) {
-          $scope.loaded = true;
+          $scope.loading = false;
+          $rootScope.$emit('loading', false);
 
           $scope.model = {
             title: blog.title,

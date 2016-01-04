@@ -1,15 +1,25 @@
 "use strict";
 
+function processExcerpt (excerpt) {
+  if (['!', '.', '?'].indexOf(excerpt[excerpt.length - 1]) === -1) {
+    return excerpt + '...';
+  }
+
+  return excerpt;
+}
+
 angular.module('mw.blogs-archive.blogs-archive', [])
   .controller('BlogsArchiveController', [
-    '$scope', 'blogsService', '$state',
-    function ($scope, blogsService, $state) {
-      $scope.loaded = false;
+    '$rootScope', '$scope', 'blogsService', '$state',
+    function ($rootScope, $scope, blogsService, $state) {
+      $scope.loading = true;
+      $rootScope.$emit('loading', true);
 
       blogsService.getArchive($state.params.year, $state.params.month)
         .then(function (blogs) {
           if (blogs && blogs.length) {
-            $scope.loaded = true;
+            $scope.loading = false;
+            $rootScope.$emit('loading', false);
 
             $scope.year = $state.params.year;
             $scope.month = $state.params.month;
@@ -24,7 +34,7 @@ angular.module('mw.blogs-archive.blogs-archive', [])
                   month: blog.month,
                   day: blog.day,
                   name: blog.name,
-                  excerpt: blog.excerpt.replace('[&hellip;]', '')
+                  excerpt:  processExcerpt(blog.excerpt)
                 }
               }).value()
           }

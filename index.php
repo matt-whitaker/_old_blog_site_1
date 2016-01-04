@@ -15,6 +15,7 @@
 <body ng-app="mw.app" class="mw-app" ng-class="{ 'sidebar-active': sidebar.active }">
     <mw-toolbar></mw-toolbar>
     <mw-sidebar></mw-sidebar>
+    <mw-loader ng-show="loading"></mw-loader>
     <mw-page></mw-page>
 
     <!--

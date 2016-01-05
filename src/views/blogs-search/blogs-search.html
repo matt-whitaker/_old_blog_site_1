@@ -1,0 +1,32 @@
+<article class="mw-blogs-search" ng-if="!loading">
+    <header>
+        <div class="header-row">
+            <h1>Search</h1>
+        </div>
+        <div class="header-row search-overview">
+            <div ng-if="query">query: </div>
+            <div ng-if="category">category: </div>
+            <div ng-if="tags">tags: </div>
+        </div>
+    </header>
+    <main>
+        <section class="archi" ng-repeat="model in models">
+            <a ui-sref="blog({ slug: model.name })">
+                <h2>{{ model.title }}&nbsp;</h2>
+                <p mw-bind-html="model.excerpt"></p>
+                <div ng-if="tags" class="tags">
+                    <span>tags : </span>
+                    <span class="fa fa-tag delimiter" ng-if="$index" ng-repeat-start="tag in model.tags track by $index"></span>
+                    <span ng-class="{ highlighted: isHighlighted(tag) }" ng-repeat-end>{{ tag }}</span>
+                </div>
+                <div ng-if="category" class="category">
+                    <span>category: </span>
+                    <span>{{ model.category }}</span>
+                </div>
+            </a>
+        </section>
+    </main>
+    <footer>
+
+    </footer>
+</article>

@@ -9,6 +9,42 @@ angular.module('mw.services.blogs', [])
         apiBase: apiBase,
         customApiBase: customApiBase,
 
+        findAll: function () {
+          var self = this;
+          this.$http.get(this.apiBase + 'posts/', { cache: true })
+          return this.$http.get(this.customApiBase + 'posts/', { cache: true })
+            .then(function (result) {
+              var posts = result.data;
+              return posts.length ? _.map(posts, function (post) {
+                return {
+                  id: post.id,
+                  name: post.slug,
+                  title: post.title,
+                  content: post.content,
+                  excerpt: post.excerpt,
+                  moment: moment(post.date, "YYYY-MM-DDTHH:mm:ss"),
+                  tags: _(post.tags)
+                    .map(function (tag) {
+                      return tag.name;
+                    }).value(),
+                  category: post.category
+                };
+              }) : [];
+            });
+        },
+
+        findByQuery: function (query) {
+          return [];
+        },
+
+        findByTag: function (query) {
+          return [];
+        },
+
+        findByCategory: function (query) {
+          return [];
+        },
+
         findBySlug: function (slug) {
           return this.$http.get(this.customApiBase + 'posts/' + slug, { cache: true })
             .then(function (result) {
@@ -87,23 +123,6 @@ angular.module('mw.services.blogs', [])
                     excerpt: datum.excerpt
                   };
                 }).value() : [];
-            });
-        },
-
-        findAll: function (filter) {
-          var self = this;
-          return this.$http.get(this.apiBase + 'posts/', { cache: true })
-            .then(function (result) {
-              var posts = result.data;
-              return posts.length ? _.map(posts, function (post) {
-                return {
-                  id: post.id,
-                  slug: post.slug,
-                  title: post.title.rendered,
-                  content: post.content.rendered,
-                  moment: moment(post.date, "YYYY-MM-DDTHH:mm:ss")
-                };
-              }) : [];
             });
         },
 

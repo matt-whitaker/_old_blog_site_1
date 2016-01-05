@@ -10,8 +10,13 @@
     </header>
     <main class="mw-blog-content mw-post" mw-bind-html="model.content"></main>
     <footer>
-        <span>tags : </span>
-        <span class="fa fa-tag delimiter" ng-if="$index" ng-repeat-start="tag in model.tags track by $index"></span>
-        <span alt="{{ tag.description }}" ng-repeat-end>{{ tag }}</span>
+        <div class="tags">
+            <span>tags : </span>
+            <span class="fa fa-tag delimiter" ng-if="$index" ng-repeat-start="tag in model.tags track by $index"></span>
+            <a alt="{{ tag.description }}" ng-repeat-end>{{ tag }}</a>
+        </div>
+        <div class="pagination">
+            <a>Prev</a> <span>|</span> <a>Next</a>
+        </div>
     </footer>
 </article>

@@ -1,7 +1,7 @@
 <?php
 
 
-##### Get Archive #####
+##### Get Archive Months #####
 function get_archive_months() {
     function parse($item)
         {

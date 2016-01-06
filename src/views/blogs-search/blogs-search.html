@@ -13,7 +13,7 @@
         <section class="archi" ng-repeat="model in models">
             <a ui-sref="blog({ slug: model.name })">
                 <h2>{{ model.title }}&nbsp;</h2>
-                <p mw-bind-html="model.excerpt"></p>
+                <p bind-html="model.excerpt"></p>
                 <div ng-if="tags" class="tags">
                     <span>tags : </span>
                     <span class="fa fa-tag delimiter" ng-if="$index" ng-repeat-start="tag in model.tags track by $index"></span>

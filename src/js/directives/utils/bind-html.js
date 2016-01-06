@@ -1,10 +1,10 @@
 "use strict";
 
 angular.module('mw.directives.utils.bind-html', [])
-  .directive('mwBindHtml', ['$compile', function ($compile) {
+  .directive('bindHtml', ['$compile', function ($compile) {
     return {
       restrict: 'A',
-      scope: {'html': '=mwBindHtml'},
+      scope: {'html': '=bindHtml'},
       link: function (scope, elem, attrs) {
         var articleScope = scope.$new(),
           articleHtml;

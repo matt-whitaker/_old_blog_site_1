@@ -1,4 +1,4 @@
 Category
 <ul>
-    <li ng-repeat="category in categories"><a>{{ category.name }}</a></li>
+    <li ng-repeat="category in categories"><a ui-sref="search({ category: category.name})" ui-sref-opts="{ inherit: false }">{{ category.title }}</a></li>
 </ul>

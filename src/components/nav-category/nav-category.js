@@ -13,8 +13,8 @@ angular.module('mw.nav-category.nav-category', [])
           elem.addClass('mw-nav-category');
 
           scope.categories = [
-            { name: "Visualizations" },
-            { name: "Web Development" }
+            { title: "Visualizations", name: "visualizations" },
+            { title: "Web Development", name: "web_development" }
           ]
         }
       }

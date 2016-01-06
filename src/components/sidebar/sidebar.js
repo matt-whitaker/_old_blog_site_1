@@ -3,8 +3,8 @@
 angular.module('mw.sidebar.sidebar', [])
 
   .directive('mwSidebar', [
-    '$q', '$http', 'templatesBase', 'blogsService',
-    function ($q, $http, templatesBase, blogsService) {
+    '$q', '$http', '$state', 'templatesBase', 'blogsService',
+    function ($q, $http, $state, templatesBase, blogsService) {
       return {
         restrict: 'E',
         scope: {},
@@ -13,6 +13,12 @@ angular.module('mw.sidebar.sidebar', [])
           elem.addClass('mw-sidebar');
 
           scope.loading = {};
+
+          scope.search = function ($evt) {
+            if (($evt === true || $evt.which === 13) && scope.search.query && scope.search.query.length) {
+              $state.go('search', { query: scope.search.query }, { inherit: false });
+            }
+          }
         }
       }
     }

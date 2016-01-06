@@ -4,9 +4,9 @@
             <h1>Search</h1>
         </div>
         <div class="header-row search-overview">
-            <div ng-if="query">query: </div>
-            <div ng-if="category">category: </div>
-            <div ng-if="tags">tags: </div>
+            <div ng-if="query">query: <span>{{ query }}</span></div>
+            <div ng-if="category">category: <span>{{ category }}</span></div>
+            <div ng-if="tags">tags: <span>{{ tags.join('') }}</span></div>
         </div>
     </header>
     <main>
@@ -21,7 +21,7 @@
                 </div>
                 <div ng-if="category" class="category">
                     <span>category: </span>
-                    <span>{{ model.category }}</span>
+                    <span>{{ model.category.title }}</span>
                 </div>
             </a>
         </section>

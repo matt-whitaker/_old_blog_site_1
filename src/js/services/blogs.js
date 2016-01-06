@@ -27,7 +27,7 @@ angular.module('mw.services.blogs', [])
                     .map(function (tag) {
                       return tag.name;
                     }).value(),
-                  category: post.category
+                  category: { name: post.category.slug, title: post.category.name }
                 };
               }) : [];
             });

@@ -9,10 +9,7 @@
     </section>
 
     <section class="container">
-        <div class="mw-search">
-            <a class="fa fa-search " ng-click="search(true)" ng-class="{ active: search.query.length }"></a>
-            <input type="text" placeholder="search..." ng-model="search.query" ng-keydown="search($event)"/>
-        </div>
+        <post-search></post-search>
     </section>
 
     <section class="container">

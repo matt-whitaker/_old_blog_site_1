@@ -1,0 +1,22 @@
+.mw-post-search {
+  position: relative;
+  display: flex;
+  color: @mw-color-swatch-3-light-1;
+
+  input[type=text] {
+    font-size: 14px;
+    padding: 3px;
+    color: @mw-color-swatch-3-light-1;
+  }
+
+  .fa-search {
+    position: absolute;
+    right: 7px;
+    top: 50%;
+    transform: translateY(-50%);
+
+    &.active {
+      cursor: pointer;
+    }
+  }
+}

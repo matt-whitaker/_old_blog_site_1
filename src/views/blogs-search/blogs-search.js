@@ -4,6 +4,14 @@ function tokenize (query) {
   return query;
 }
 
+function processExcerpt (excerpt) {
+  if (['!', '.', '?'].indexOf(excerpt[excerpt.length - 1]) === -1) {
+    return excerpt + '...';
+  }
+
+  return excerpt;
+}
+
 angular.module('mw.blogs-search.blogs-search', [])
   .controller('BlogsSearchController', [
     '$scope', '$state', 'blogsService',
@@ -31,7 +39,7 @@ angular.module('mw.blogs-search.blogs-search', [])
         .then(function (blogs) {
           $scope.models = _(blogs)
             .map(function (blog) {
-              var excerpt = blog.excerpt;
+              var excerpt = processExcerpt(blog.excerpt);
 
               blog.excerpt = '<p>' + excerpt + '</p>';
               return blog;

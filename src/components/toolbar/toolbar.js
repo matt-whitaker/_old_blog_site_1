@@ -2,7 +2,7 @@
 
 angular.module('mw.toolbar.toolbar', [])
 
-  .directive('mwToolbar', [
+  .directive('toolbar', [
     '$q', '$http', 'templatesBase', '$rootScope',
     function ($q, $http, templatesBase, $rootScope) {
       return {

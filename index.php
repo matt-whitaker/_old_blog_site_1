@@ -13,10 +13,10 @@
     <?php wp_head(); ?>
 </head>
 <body ng-app="mw.app" class="mw-app" ng-class="{ 'sidebar-active': sidebar.active }">
-    <mw-toolbar></mw-toolbar>
-    <mw-sidebar></mw-sidebar>
+    <toolbar></toolbar>
+    <sidebar></sidebar>
     <loader ng-show="loading"></loader>
-    <mw-page></mw-page>
+    <page></page>
 
     <script src="/wp-content/themes/disjointedthinking/js/app.js" type="text/javascript"></script>
     <?php

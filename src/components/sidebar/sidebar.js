@@ -2,7 +2,7 @@
 
 angular.module('mw.sidebar.sidebar', [])
 
-  .directive('mwSidebar', [
+  .directive('sidebar', [
     '$q', '$http', '$state', 'templatesBase', 'blogsService',
     function ($q, $http, $state, templatesBase, blogsService) {
       return {

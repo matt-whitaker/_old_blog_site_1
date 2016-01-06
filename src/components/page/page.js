@@ -2,7 +2,7 @@
 
 angular.module('mw.page.page', [])
 
-  .directive('mwPage', [
+  .directive('page', [
     '$q', '$http', 'templatesBase',
     function ($q, $http, templatesBase) {
       return {

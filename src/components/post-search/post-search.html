@@ -1,3 +1,5 @@
-<dropdown></dropdown>
-<a class="fa fa-search" ng-click="search(true)" ng-class="{ active: search.query.length }"></a>
-<input type="text" placeholder="search..." ng-model="search.query" ng-keydown="search($event)"/>
+<!--<div class="search-dropdown">-->
+    <!--<dropdown></dropdown>-->
+<!--</div>-->
+<a class="fa fa-search" ng-click="submit(true)" ng-class="{ active: model.length }"></a>
+<input type="text" placeholder="search..." ng-model="model" ng-keydown="submit($event)"/>

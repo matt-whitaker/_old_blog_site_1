@@ -14,10 +14,8 @@ angular.module('mw.sidebar.sidebar', [])
 
           scope.loading = {};
 
-          scope.search = function ($evt) {
-            if (($evt === true || $evt.which === 13) && scope.search.query && scope.search.query.length) {
-              $state.go('search', { query: scope.search.query }, { inherit: false });
-            }
+          scope.search = function () {
+            $state.go('search', { query: scope.search.query }, { inherit: false });
           }
         }
       }

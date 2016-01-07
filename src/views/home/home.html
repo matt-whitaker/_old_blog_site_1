@@ -1,5 +1,12 @@
-<mw-loader loaded="loaded"></mw-loader>
-<div class="mw-home" ng-if="loaded">
-    <h1>{{title}}</h1>
-    <div class="mw-home-content mw-article-content" bind-html="content"></div>
-</div>
+<article class="mw-home" ng-if="!loading">
+    <header>
+        <div class="header-row">
+            <h1>{{ title }}</h1>
+        </div>
+        <div class="header-row">
+            <div>by {{ 'Matt Whitaker' }}</div>
+        </div>
+    </header>
+    <main class="mw-home-content mw-article-content" bind-html="content"></main>
+    <footer></footer>
+</article>

@@ -21,21 +21,17 @@ angular.module('mw.blogs-search.blogs-search', [])
       var tags = $state.params.tag;
       var category = $state.params.category;
 
+      var promise;
+
       if (query) {
-        $scope.query = query;
-
-        blogsService.findByQuery(query);
+        promise = blogsService.findByQuery($scope.query = query);
       } else if (tags && tags.length) {
-        $scope.tags = tags;
-
-        blogsService.findByTag(query);
+        promise = blogsService.findByTag($scope.tags = tags);
       } else if (category) {
-        $scope.category = category;
-
-        blogsService.findByCategory(query);
+        promise = blogsService.findByCategory($scope.category = category);
       }
 
-      blogsService.findAll()
+      promise
         .then(function (blogs) {
           $scope.models = _(blogs)
             .map(function (blog) {

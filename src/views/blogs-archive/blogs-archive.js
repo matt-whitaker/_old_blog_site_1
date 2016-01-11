@@ -10,12 +10,12 @@ function processExcerpt (excerpt) {
 
 angular.module('mw.blogs-archive.blogs-archive', [])
   .controller('BlogsArchiveController', [
-    '$rootScope', '$scope', 'blogsService', '$state',
-    function ($rootScope, $scope, blogsService, $state) {
+    '$rootScope', '$scope', 'blogsService', '$state', 'archiveService',
+    function ($rootScope, $scope, blogsService, $state, archiveService) {
       $scope.loading = true;
       $rootScope.$emit('loading', true);
 
-      blogsService.getArchive($state.params.year, $state.params.month)
+      archiveService.getArchive($state.params.year, $state.params.month)
         .then(function (blogs) {
           if (blogs && blogs.length) {
             $scope.loading = false;

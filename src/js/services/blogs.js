@@ -37,12 +37,51 @@ angular.module('mw.services.blogs', [])
           return [];
         },
 
-        findByTag: function (query) {
-          return [];
+        findByTag: function (tag) {
+          var self = this;
+          this.$http.get(this.apiBase + 'posts/', { cache: true })
+          return this.$http.get(this.customApiBase + 'posts/', { cache: true, params: { tag: tag } })
+            .then(function (result) {
+              var posts = result.data;
+              return posts.length ? _.map(posts, function (post) {
+                return {
+                  id: post.id,
+                  name: post.slug,
+                  title: post.title,
+                  content: post.content,
+                  excerpt: post.excerpt,
+                  moment: moment(post.date, "YYYY-MM-DDTHH:mm:ss"),
+                  tags: _(post.tags)
+                    .map(function (tag) {
+                      return tag.name;
+                    }).value(),
+                  category: { name: post.category.slug, title: post.category.name }
+                };
+              }) : [];
+            });
         },
 
-        findByCategory: function (query) {
-          return [];
+        findByCategory: function (category) {
+          var self = this;
+          return this.$http.get(this.customApiBase + 'posts/', { cache: true, params: { category: category } })
+            .then(function (result) {
+              var posts = result.data;
+              return posts.length ? _.map(posts, function (post) {
+                return {
+                  id: post.id,
+                  name: post.slug,
+                  title: post.title,
+                  content: post.content,
+                  excerpt: post.excerpt,
+                  moment: moment(post.date, "YYYY-MM-DDTHH:mm:ss"),
+                  tags: _(post.tags)
+                    .map(function (tag) {
+                      return tag.name;
+                    }).value(),
+                  category: { name: post.category.slug, title: post.category.name }
+                };
+              }) : [];
+            });
         },
 
         findBySlug: function (slug) {
@@ -77,68 +116,6 @@ angular.module('mw.services.blogs', [])
                     moment: moment(post.post_date, "YYYY-MM-DD HH:MM:SS")
                   }
                 }).value() : [];
-            });
-        },
-
-        getArchiveMonths: function () {
-          return this.$http.get(this.customApiBase + 'archive/months', { cache: true })
-            .then(function (result) {
-              var dates = result.data;
-
-              return dates.length ? _(dates)
-                .map(function (date) {
-                  return {
-                    year: date.year,
-                    month: date.month,
-                    moment: moment(date.year + "-" + date.month, 'YYYY-MM')
-                  };
-                })
-                .value() : [];
-            });
-        },
-
-        getArchive: function (year, month) {
-          if (!parseInt(year) || !parseInt(month)) {
-            throw("Must provide year and month");
-          }
-
-          year = parseInt(year);
-          month = parseInt(month);
-
-          return this.$http.get(this.customApiBase + 'archive', { cache: true, params: { year: year, month: month } })
-            .then(function (result) {
-              var posts = result.data;
-              return posts.length ? _(posts)
-                .select(function (datum) {
-                  return datum.year === year && datum.month === month;
-                })
-                .map(function (datum) {
-                  return {
-                    moment: moment(""+datum.year+"-"+datum.month+"-"+datum.day, "YYYY-MM-DD"),
-                    year: datum.year,
-                    month: datum.month,
-                    day: datum.day,
-                    title: datum.title,
-                    name: datum.name,
-                    excerpt: datum.excerpt
-                  };
-                }).value() : [];
-            });
-        },
-
-        getCharts: function () {
-          return this.$http.get(this.apiBase + 'posts/?filter[category_name]=Visualizations', { cache: true })
-            .then(function(result) {
-              var posts = result.data;
-              return posts.length ? _.map(posts, function (post) {
-                return {
-                  id: post.id,
-                  name: post.slug,
-                  title: post.title.rendered,
-                  content: post.content.rendered,
-                  moment: moment(post.date, "YYYY-MM-DDTHH:mm:ss")
-                }
-              }) : [];
             });
         }
       });

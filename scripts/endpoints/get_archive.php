@@ -4,15 +4,6 @@
 function get_archive($data) {
     function extract_excerpt ($content, $maxLength) {
         $content = substr(strip_tags($content), 0, $maxLength);
-
-        error_log($content);
-
-        #$pos = strpos($content, '.', -1);
-
-        #error_log($pos);
-
-        #$content = substr($content, 0, $pos + 1);
-
         return $content;
     }
 

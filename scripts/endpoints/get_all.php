@@ -10,19 +10,11 @@ function get_all($data) {
     function extract_excerpt ($content, $maxLength) {
         $content = substr(strip_tags($content), 0, $maxLength);
 
-        #$pos = strpos($content, '.', -1);
-
-        #error_log($pos);
-
-        #$content = substr($content, 0, $pos + 1);
-
         return $content;
     }
 
     # id, slug, title, content, date
     function parse ($item) {
-        #error_log( print_r( $item, true ) );
-
         $excerpt = extract_excerpt($item->post_content, 220);
         $tags = wp_get_post_tags($item->ID);
         $categories = array_map('extract_category', wp_get_post_categories($item->ID));
@@ -39,7 +31,14 @@ function get_all($data) {
         );
     }
 
-    $posts = get_posts();
+    $posts =  null;
+    if ($data['category']) {
+        $posts = get_posts('category=' . $data['category']);
+    } else if ($data['tag']) {
+        $posts = get_posts('tag=' . $data['tag']);
+    } else {
+        $posts = get_posts();
+    }
 
     return array_map('parse', $posts);
 }

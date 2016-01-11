@@ -3,8 +3,8 @@
 angular.module('mw.nav-category.nav-category', [])
 
   .directive('navCategory', [
-    '$q', '$http', 'templatesBase',
-    function ($q, $http, templatesBase) {
+    '$q', '$http', 'templatesBase', 'categoriesService',
+    function ($q, $http, templatesBase, categoriesService) {
       return {
         restrict: 'E',
         scope: {},
@@ -12,10 +12,10 @@ angular.module('mw.nav-category.nav-category', [])
         link: function (scope, elem, attrs) {
           elem.addClass('mw-nav-category');
 
-          scope.categories = [
-            { title: "Visualizations", name: "visualizations" },
-            { title: "Web Development", name: "web_development" }
-          ]
+          categoriesService.findAll()
+            .then(function (categories) {
+              scope.categories = categories;
+            });
         }
       }
     }

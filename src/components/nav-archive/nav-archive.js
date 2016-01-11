@@ -3,8 +3,8 @@
 angular.module('mw.nav-archive.nav-archive', [])
 
   .directive('navArchive', [
-    '$q', '$http', 'templatesBase', 'blogsService',
-    function ($q, $http, templatesBase, blogsService) {
+    '$q', '$http', 'templatesBase', 'archiveService',
+    function ($q, $http, templatesBase, archiveService) {
       return {
         restrict: 'E',
         templateUrl: templatesBase + 'nav-archive.html',
@@ -12,7 +12,7 @@ angular.module('mw.nav-archive.nav-archive', [])
           elem.addClass('mw-nav-archive');
 
           scope.loading.archive = true;
-          blogsService.getArchiveMonths()
+          archiveService.getMonths()
             .then(function (archive) {
               scope.loading.archive = false;
 

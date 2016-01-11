@@ -33,7 +33,8 @@ function get_all($data) {
 
     $posts =  null;
     if ($data['category']) {
-        $posts = get_posts('category=' . $data['category']);
+        error_log($data['category']);
+        $posts = get_posts('category_name=' . $data['category']);
     } else if ($data['tag']) {
         error_log($data['tag']);
         $posts = get_posts('tag=' . $data['tag']);

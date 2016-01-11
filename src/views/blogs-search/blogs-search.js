@@ -27,7 +27,7 @@ angular.module('mw.blogs-search.blogs-search', [])
 
       if (query) {
         promise = blogsService.findByQuery($scope.query = query);
-      } else if (tags && tags.length) {
+      } else if (tags && tags.length && tags[0]) {
         promise = blogsService.findByTag($scope.tags = tags);
       } else if (category) {
         promise = blogsService.findByCategory($scope.category = category);

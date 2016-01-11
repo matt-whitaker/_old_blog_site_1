@@ -14,7 +14,10 @@ angular.module('mw.nav-category.nav-category', [])
 
           categoriesService.findAll()
             .then(function (categories) {
-              scope.categories = categories;
+              scope.categories = _(categories)
+                .filter(function (category) {
+                  return category.title !== 'Uncategorized'
+                }).value();
             });
         }
       }

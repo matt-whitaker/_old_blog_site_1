@@ -17,9 +17,9 @@ angular.module('mw.blogs-search.blogs-search', [])
     '$scope', '$state', 'blogsService',
     function ($scope, $state, blogsService) {
 
-      var query = $state.params.query;
-      var tags = $state.params.tag;
-      var category = $state.params.category;
+      var query = $state.params.q;
+      var tags = $state.params.t;
+      var category = $state.params.c;
 
       var promise;
 
@@ -46,7 +46,7 @@ angular.module('mw.blogs-search.blogs-search', [])
   .config(['$stateProvider', function ($stateProvider) {
     $stateProvider
       .state('search', {
-        url: "/search?query&category&tag",
+        url: "/search?q&c&t",
         params: {
           tag: { array: true }
         },

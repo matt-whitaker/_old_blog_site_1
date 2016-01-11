@@ -15,7 +15,7 @@ angular.module('mw.sidebar.sidebar', [])
           scope.loading = {};
 
           scope.search = function () {
-            $state.go('search', { query: scope.search.query }, { inherit: false });
+            $state.go('search', { q: scope.search.query }, { inherit: false });
           }
         }
       }

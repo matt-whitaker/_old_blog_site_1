@@ -1,5 +1,24 @@
 "use strict";
 
+function processFindAll (result) {
+  var posts = result.data;
+  return posts.length ? _.map(posts, function (post) {
+    return {
+      id: post.id,
+      name: post.slug,
+      title: post.title,
+      content: post.content,
+      excerpt: post.excerpt,
+      moment: moment(post.date, "YYYY-MM-DDTHH:mm:ss"),
+      tags: _(post.tags)
+        .map(function (tag) {
+          return tag.name;
+        }).value(),
+      category: { name: post.category.slug, title: post.category.name }
+    };
+  }) : [];
+}
+
 angular.module('mw.services.blogs', [])
   .factory('blogsService', [
     '$http', 'apiBase', 'customApiBase',
@@ -11,77 +30,26 @@ angular.module('mw.services.blogs', [])
 
         findAll: function () {
           var self = this;
-          this.$http.get(this.apiBase + 'posts/', { cache: true })
           return this.$http.get(this.customApiBase + 'posts/', { cache: true })
-            .then(function (result) {
-              var posts = result.data;
-              return posts.length ? _.map(posts, function (post) {
-                return {
-                  id: post.id,
-                  name: post.slug,
-                  title: post.title,
-                  content: post.content,
-                  excerpt: post.excerpt,
-                  moment: moment(post.date, "YYYY-MM-DDTHH:mm:ss"),
-                  tags: _(post.tags)
-                    .map(function (tag) {
-                      return tag.name;
-                    }).value(),
-                  category: { name: post.category.slug, title: post.category.name }
-                };
-              }) : [];
-            });
+            .then(processFindAll);
         },
 
         findByQuery: function (query) {
-          return [];
+          var self = this;
+          return this.$http.get(this.customApiBase + 'posts/', { cache: false, params: { query: query } })
+            .then(processFindAll);
         },
 
         findByTag: function (tag) {
           var self = this;
-          this.$http.get(this.apiBase + 'posts/', { cache: true })
-          return this.$http.get(this.customApiBase + 'posts/', { cache: true, params: { tag: tag } })
-            .then(function (result) {
-              var posts = result.data;
-              return posts.length ? _.map(posts, function (post) {
-                return {
-                  id: post.id,
-                  name: post.slug,
-                  title: post.title,
-                  content: post.content,
-                  excerpt: post.excerpt,
-                  moment: moment(post.date, "YYYY-MM-DDTHH:mm:ss"),
-                  tags: _(post.tags)
-                    .map(function (tag) {
-                      return tag.name;
-                    }).value(),
-                  category: { name: post.category.slug, title: post.category.name }
-                };
-              }) : [];
-            });
+          return this.$http.get(this.customApiBase + 'posts/', { cache: false, params: { tag: tag } })
+            .then(processFindAll);
         },
 
         findByCategory: function (category) {
           var self = this;
-          return this.$http.get(this.customApiBase + 'posts/', { cache: true, params: { category: category } })
-            .then(function (result) {
-              var posts = result.data;
-              return posts.length ? _.map(posts, function (post) {
-                return {
-                  id: post.id,
-                  name: post.slug,
-                  title: post.title,
-                  content: post.content,
-                  excerpt: post.excerpt,
-                  moment: moment(post.date, "YYYY-MM-DDTHH:mm:ss"),
-                  tags: _(post.tags)
-                    .map(function (tag) {
-                      return tag.name;
-                    }).value(),
-                  category: { name: post.category.slug, title: post.category.name }
-                };
-              }) : [];
-            });
+          return this.$http.get(this.customApiBase + 'posts/', { cache: false, params: { category: category } })
+            .then(processFindAll);
         },
 
         findBySlug: function (slug) {

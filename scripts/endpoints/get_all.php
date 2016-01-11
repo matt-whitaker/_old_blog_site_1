@@ -36,6 +36,10 @@ function get_all($data) {
         $posts = get_posts('category=' . $data['category']);
     } else if ($data['tag']) {
         $posts = get_posts('tag=' . $data['tag']);
+
+    } else if ($data['query']) {
+        $posts = get_posts('s=' . $data['query'] . '&numberposts=-1');
+
     } else {
         $posts = get_posts();
     }

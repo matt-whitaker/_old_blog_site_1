@@ -11,3 +11,11 @@ My personal blog and code playground.
 5. download and extract Wordpress into the [repo_dir]/wordpress
 6. install WAMP/MAMP/whatever
 7. run wordpress install
+
+# Wordpress Plugins #
+
+* TinyMCE Advanced
+* WP REST API
+
+# Reminders #
+* post format

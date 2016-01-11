@@ -14,11 +14,13 @@ function processExcerpt (excerpt) {
 
 angular.module('mw.blogs-search.blogs-search', [])
   .controller('BlogsSearchController', [
-    '$scope', '$state', 'blogsService',
-    function ($scope, $state, blogsService) {
+    '$rootScope', '$scope', '$state', 'blogsService',
+    function ($rootScope, $scope, $state, blogsService) {
+      $scope.loading = true;
+      $rootScope.$emit('loading', true);
 
       var query = $state.params.q;
-      var tags = $state.params.t;
+      var tags = _.flatten([$state.params.t]);
       var category = $state.params.c;
 
       var promise;
@@ -38,8 +40,12 @@ angular.module('mw.blogs-search.blogs-search', [])
               var excerpt = processExcerpt(blog.excerpt);
 
               blog.excerpt = '<p>' + excerpt + '</p>';
+
               return blog;
             }).value();
+
+          $scope.loading = false;
+          $rootScope.$emit('loading', false);
         })
     }
   ])

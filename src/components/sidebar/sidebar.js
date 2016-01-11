@@ -3,8 +3,8 @@
 angular.module('mw.sidebar.sidebar', [])
 
   .directive('sidebar', [
-    '$q', '$http', '$state', 'templatesBase', 'blogsService',
-    function ($q, $http, $state, templatesBase, blogsService) {
+    '$q', '$http', '$state', 'templatesBase', 'blogsService', '$location',
+    function ($q, $http, $state, templatesBase, blogsService, $location) {
       return {
         restrict: 'E',
         scope: {},
@@ -13,6 +13,9 @@ angular.module('mw.sidebar.sidebar', [])
           elem.addClass('mw-sidebar');
 
           scope.loading = {};
+          scope.search = {
+            query: $location.search().q
+          }
 
           scope.search = function () {
             $state.go('search', { q: scope.search.query }, { inherit: false });

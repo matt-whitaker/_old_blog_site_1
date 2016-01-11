@@ -35,6 +35,7 @@ function get_all($data) {
     if ($data['category']) {
         $posts = get_posts('category=' . $data['category']);
     } else if ($data['tag']) {
+        error_log($data['tag']);
         $posts = get_posts('tag=' . $data['tag']);
 
     } else if ($data['query']) {

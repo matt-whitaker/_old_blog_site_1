@@ -14,7 +14,10 @@ function processFindAll (result) {
         .map(function (tag) {
           return tag.name;
         }).value(),
-      category: { name: post.category.slug, title: post.category.name }
+      categories: _(post.categories)
+        .map(function (category) {
+          return { name: category.slug, title: category.name };
+        }).value()
     };
   }) : [];
 }

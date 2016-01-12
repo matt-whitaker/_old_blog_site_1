@@ -27,7 +27,7 @@ function get_all($data) {
             excerpt     => $excerpt,
             date        => $item->post_date,
             tags        => $tags,
-            category    => empty($categories) ? null : $categories[0]
+            categories    => $categories
         );
     }
 

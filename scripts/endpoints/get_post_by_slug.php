@@ -4,7 +4,8 @@
 ##### Get Post By Slug #####
 function get_post_by_slug($data) {
     $posts = get_posts(array(
-        'name' => $data['slug']
+        'name' => $data['slug'],
+        'post_status' => 'publish'
     ));
 
     if (empty( $posts )) {
@@ -15,6 +16,10 @@ function get_post_by_slug($data) {
         ));
 
         $posts[0]->tags = wp_get_post_tags($posts[0]->ID);
+    }
+
+    if ($posts[0]->post_password) {
+        return null;
     }
 
     return $posts[0];

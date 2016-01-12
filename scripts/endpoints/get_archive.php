@@ -28,7 +28,7 @@ function get_archive($data) {
                 MONTH(p.post_date) month,
                 DAY(p.post_date) day
         FROM wp_posts p
-        WHERE p.post_type = 'post' AND p.post_status = 'publish'
+        WHERE p.post_type = 'post' AND p.post_status = 'publish' AND NOT p.post_password > ''
         ORDER BY year DESC, month DESC, day DESC
     ", OBJECT);
 

@@ -15,6 +15,9 @@ angular.module('mw.services.categories', [])
               var categories = result.data;
               return categories.length
                 ? _(categories)
+                  .filter(function (category) {
+                    return category.count;
+                  })
                   .map(function (category) {
                     return {
                       title: category.name,

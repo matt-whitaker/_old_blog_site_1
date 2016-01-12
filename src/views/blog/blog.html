@@ -19,7 +19,7 @@
                ng-repeat-end>{{ tag }}</a>
         </div>
         <div class="pagination">
-            <a>Prev</a> <span>|</span> <a>Next</a>
+            <a ng-class="{ disabled: !model.prevName }" ui-sref="blog({ slug: model.prevName })">Prev</a> <span>|</span> <a ng-class="{ disabled: !model.nextName }" ui-sref="blog({ slug: model.nextName })">Next</a>
         </div>
     </footer>
 </article>

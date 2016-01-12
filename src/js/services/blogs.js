@@ -69,7 +69,10 @@ angular.module('mw.services.blogs', [])
                     slug: tag.slug,
                     description: tag.description
                   }
-                })
+                }),
+
+                prevName: post.prev_name,
+                nextName: post.next_name
               } : null;
             });
         },

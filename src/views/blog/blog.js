@@ -18,7 +18,10 @@ angular.module('mw.blog.blog', [])
             content: blog.content,
             tags: _.map(blog.tags, function (tag) {
               return tag.name;
-            })
+            }),
+
+            prevName: blog.prevName,
+            nextName: blog.nextName
           };
         }
       });

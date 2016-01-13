@@ -3,15 +3,8 @@
 
 ##### Get Page By Slug #####
 function get_page_by_slug($data) {
-    $pages = get_pages(array(
-        'name' => $data['slug']
-    ));
-
-    if (empty( $pages )) {
-        return null;
-    }
-
-    return $pages[0];
+    $page = get_page_by_path($data['slug']);
+    return $page;
 }
 
 add_action('rest_api_init', function () {

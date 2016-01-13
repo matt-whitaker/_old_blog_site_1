@@ -71,6 +71,10 @@ angular.module('mw.services.blogs', [])
                   }
                 }),
 
+                attachment: post.post_head_attachment && post.post_head_attachment.length 
+                  ? post.post_head_attachment[0] 
+                  : null,
+
                 prevName: post.prev_name,
                 nextName: post.next_name
               } : null;

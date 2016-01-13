@@ -20,6 +20,10 @@ angular.module('mw.blog.blog', [])
               return tag.name;
             }),
 
+            attachment: blog.attachment && {
+              guid: blog.attachment.guid
+            },
+
             prevName: blog.prevName,
             nextName: blog.nextName
           };

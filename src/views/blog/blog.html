@@ -1,5 +1,6 @@
 <article class="mw-blog" ng-if="!loading">
     <header>
+        <div class="header-row" ng-if="model.attachment.guid"><img ng-src="{{ model.attachment.guid }}" /></div>
         <div class="header-row">
             <h1>{{ model.title }}</h1>
         </div>

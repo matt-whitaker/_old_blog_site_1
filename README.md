@@ -16,6 +16,7 @@ My personal blog and code playground.
 
 * TinyMCE Advanced
 * WP REST API
+* Media Tags
 
 # Reminders #
 * post format

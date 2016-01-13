@@ -26,18 +26,29 @@ function get_post_by_slug($data) {
     global $post;
 
     $oldGlobal = $post;
-    $post = $posts[0];
 
+    $post = $posts[0];
     $previous_post = get_previous_post();
     $next_post = get_next_post();
+    
+    while ($previous_post->post_password) {
+      $post = $previous_post;
+      $previous_post = get_previous_post();
+    }
 
+    while ($next_post->post_password) {
+      $post = $next_post;
+      $next_post = get_next_post();
+    }
+    
     $post = $oldGlobal;
+
 
     if ($previous_post) {
       $posts[0]->prev_name = $previous_post->post_name;
     }
 
-    if ($next_post) {
+    if ($next_post && !($next_post->post_password)) {
       $posts[0]->next_name = $next_post->post_name;
     }    
 

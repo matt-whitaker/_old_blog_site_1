@@ -14,10 +14,10 @@
         <div class="tags">
             <span>tags : </span>
             <span class="fa fa-tag delimiter" ng-if="$index" ng-repeat-start="tag in model.tags track by $index"></span>
-            <a ui-sref="search({ t: tag })"
+            <a ui-sref="search({ t: tag.name })"
                ui-sref-opts="{ inherit: false }"
                alt="{{ tag.description }}"
-               ng-repeat-end>{{ tag }}</a>
+               ng-repeat-end>{{ tag.title }}</a>
         </div>
         <div class="pagination">
             <a ng-class="{ disabled: !model.prevName }" ui-sref="blog({ slug: model.prevName })">Prev</a> <span>|</span> <a ng-class="{ disabled: !model.nextName }" ui-sref="blog({ slug: model.nextName })">Next</a>

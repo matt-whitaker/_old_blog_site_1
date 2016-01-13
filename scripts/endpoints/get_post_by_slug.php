@@ -22,13 +22,6 @@ function get_post_by_slug($data) {
 
     $posts[0]->post_head_attachment = get_attachments_by_media_tags('media_tags=header&post_parent=' . $posts[0]->ID);
 
-    // $posts[0]->attachments = get_children(array(
-    //     'post_parent' => $posts[0]->ID,
-    //     'post_status' => 'inherit',
-    //     'post_type' => 'attachment',
-    //     'post_mime_type' => 'image',
-    // ));
-
     // prev / next
     global $post;
 

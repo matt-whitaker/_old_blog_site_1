@@ -12,7 +12,11 @@ function processFindAll (result) {
       moment: moment(post.date, "YYYY-MM-DDTHH:mm:ss"),
       tags: _(post.tags)
         .map(function (tag) {
-          return tag.name;
+          return {
+            name: tag.slug,
+            title: tag.name,
+            description: tag.description
+          };
         }).value(),
       categories: _(post.categories)
         .map(function (category) {
@@ -65,10 +69,10 @@ angular.module('mw.services.blogs', [])
                 moment: moment(post.post_date, "YYYY-MM-DD HH:mm:ss"),
                 tags: _.map(post.tags, function (tag) {
                   return {
-                    name: tag.name,
-                    slug: tag.slug,
+                    name: tag.slug,
+                    title: tag.name,
                     description: tag.description
-                  }
+                  };
                 }),
 
                 attachment: post.post_head_attachment && post.post_head_attachment.length 

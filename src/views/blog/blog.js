@@ -17,7 +17,11 @@ angular.module('mw.blog.blog', [])
             date: blog.moment,
             content: blog.content,
             tags: _.map(blog.tags, function (tag) {
-              return tag.name;
+              return {
+                name: tag.name,
+                title: tag.title,
+                description: tag.description
+              };
             }),
 
             attachment: blog.attachment && {

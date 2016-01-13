@@ -20,7 +20,7 @@ function get_post_by_slug($data) {
 
     $posts[0]->tags = wp_get_post_tags($posts[0]->ID);
 
-    $posts[0]->post_head_attachment = get_attachments_by_media_tags('media_tags=header&post_parent=' . $posts[0]->ID);
+    $posts[0]->post_head_attachment = get_attachments_by_media_tags('media_tags=banner');
 
     // prev / next
     global $post;

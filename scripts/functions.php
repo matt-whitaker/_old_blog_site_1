@@ -1,5 +1,7 @@
 <?php
 
+add_theme_support( 'post-thumbnails' ); 
+
 /* ENDPOINTS */
 
 include 'endpoints/get_all.php';

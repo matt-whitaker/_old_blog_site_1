@@ -1,12 +1,64 @@
 <article class="mw-home" ng-if="!loading">
     <header>
         <div class="header-row">
-            <h1>{{ title }}</h1>
-        </div>
-        <div class="header-row">
-            <div>by {{ 'Matt Whitaker' }}</div>
+            <div class="avatar">
+                <img src="/wp-content/themes/disjointedthinking/images/avatar.png" />
+            </div>
         </div>
     </header>
-    <main class="mw-home-content mw-article-content" bind-html="content"></main>
+    <!-- <main class="mw-home-content mw-article-content" bind-html="content"></main> -->
+    <main class="mw-home-content">
+        <section class="subject">
+            <p>
+                Inventore veritatis et quasi architecto beatae vitae dicta sunt explicabo. Et iusto odio dignissimos ducimus qui blanditiis praesentium voluptatum deleniti atque. Cupiditate non provident, similique sunt in culpa qui officia deserunt mollitia.
+            </p>
+
+            <p>
+                At vero eos et accusamus. Eaque ipsa quae ab illo inventore veritatis et quasi. Qui officia deserunt mollit anim id est laborum. Excepteur sint occaecat cupidatat non proident, sunt in culpa. Ut aut reiciendis voluptatibus maiores alias consequatur aut perferendis doloribus asperiores repellat.
+            </p>
+
+            <!-- <div class="category-row">
+                <div><a class="fa fa-google-plus fa-2x" ui-sref="search({ c: 'web-development'})"></a></div>
+                <div><a class="fa fa-linkedin-square fa-2x" ui-sref="search({ c: 'node-js'})"></a></div>
+                <div><a class="fa fa-git fa-2x" ui-sref="search({ c: 'angular-js'})"></a></div>
+            </div> -->
+        </section>
+
+        <section class="subject">
+            <div class="subject-icon"><i class="fa fa-3x fa-code"></i></div>
+            <p>
+                <strong>Let's talk about code.</strong>
+                By day, I am a software engineer. I focus my experience in front-end development and user experience, but I try to diversify my interests. Checkout one of these categories to read my ramblings about web development, user experience, and visualizing information. 
+            </p>
+
+            <div class="category-row">
+                <div><a ui-sref="search({ c: 'web-development'})">Web Development</a></div>
+                <div><a ui-sref="search({ c: 'node-js'})">Node.js</a></div>
+                <div><a ui-sref="search({ c: 'angular-js'})">Angular.js</a></div>
+            </div>
+        </section> 
+
+        <section class="subject">
+            <div class="subject-icon"><i class="fa fa-3x fa-map-marker"></i></div>
+            <p>
+                <strong>Do you like to travel?</strong>
+                Living in the city has its perks, but I definitely need my breaks. I love to travel around in search of interesting hikes, breweries, and food. If you're looking for a recommendation, try one of these categories. 
+            </p>
+
+            <div class="category-row">
+                <div><a ui-sref="search({ c: 'breweries'})">Breweries</a></div>
+                <div><a ui-sref="search({ c: 'nature'})">Nature</a></div>
+                <div><a ui-sref="search({ c: 'eating'})">Eating</a></div>
+            </div>
+        </section> 
+
+        <section class="subject">
+            <div class="category-row">
+                <div><a class="fa fa-google-plus fa-2x" ui-sref="search({ c: 'web-development'})"></a></div>
+                <div><a class="fa fa-linkedin-square fa-2x" ui-sref="search({ c: 'node-js'})"></a></div>
+                <div><a class="fa fa-git fa-2x" ui-sref="search({ c: 'angular-js'})"></a></div>
+            </div>
+        </section>
+    </main>
     <footer></footer>
 </article>

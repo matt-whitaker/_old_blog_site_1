@@ -213,25 +213,34 @@ gulp.task('clean-css', function () {
 });
 
 gulp.task('build-css', ['clean-css'], function () {
-  return gulp.src(WORKING_DIRECTORY + LESS_SRC_PATH + 'app.less')
-    .pipe(less({
-      paths: [
-        WORKING_DIRECTORY + LESS_SRC_PATH,
-        WORKING_DIRECTORY + COMPONENTS_SRC_PATH,
-        WORKING_DIRECTORY + VIEWS_SRC_PATH
-      ]
-    }))
-    .on('error', function (error) {
-      console.log(error.toString());
-      this.emit('end');
-    })
-    .pipe(rename('style.css'))
+  return es.merge(
+    gulp.src(_.filter(bowerFiles(), function (file) {
+        return _.endsWith(path.basename(file), '.css');
+      }))
+      .pipe(flatten())
+      .pipe(bindOutput(TEMPLATE_VM.CSS, 'LIBS'))
+      .pipe(gulp.dest(CSS_DIST_PATH + "css/")),
 
-    // Prod
-    .pipe(gif(argv.prod, minifyCss()))
-    // End Prod
+    gulp.src(WORKING_DIRECTORY + LESS_SRC_PATH + 'app.less')
+      .pipe(less({
+        paths: [
+          WORKING_DIRECTORY + LESS_SRC_PATH,
+          WORKING_DIRECTORY + COMPONENTS_SRC_PATH,
+          WORKING_DIRECTORY + VIEWS_SRC_PATH
+        ]
+      }))
+      .on('error', function (error) {
+        console.log(error.toString());
+        this.emit('end');
+      })
+      .pipe(rename('style.css'))
 
-    .pipe(gulp.dest(CSS_DIST_PATH))
+      // Prod
+      .pipe(gif(argv.prod, minifyCss()))
+      // End Prod
+
+      .pipe(gulp.dest(CSS_DIST_PATH))
+  )
 });
 
 // =========== END CSS TASKS

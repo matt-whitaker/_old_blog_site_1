@@ -20,6 +20,7 @@
     "angular-animate": "~1.4.7",
     "ngScrollSpy": "~1.0.9",
     "font-awesome": "~4.4.0",
-    "jquery": "~2.2.0"
+    "jquery": "~2.2.0",
+    "perfect-scrollbar": "~0.6.8"
   }
 }

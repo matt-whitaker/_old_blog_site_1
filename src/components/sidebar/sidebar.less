@@ -4,8 +4,7 @@
   position: fixed;
   width: @mw-sidebar-width;
   height: 100vh;
-  overflow-y: auto;
-  overflow-x: visible;
+
   right: 0;
   top: 0;
 
@@ -20,6 +19,14 @@
   .sidebar-active & {
     transform: translateX(0);
   }
+
+  > aside {
+    position: relative;
+    overflow-y: auto;
+    overflow-x: visible;
+    height: 100vh;
+  }
+
 
   .container {
     padding: 20px 30px;

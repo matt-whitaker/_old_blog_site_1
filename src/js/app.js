@@ -9,7 +9,9 @@ angular.module('mw.app')
 
     window.Dev = {};
   }])
-  .run(['$rootScope', function ($rootScope) {
+  .run(['$rootScope', '$document', function ($rootScope, $document) {
+    var scrollingContainer = angular.element($document[0].body).children('div').first()[0];
+
     // configs
     angular.extend($rootScope, {
       toolbar: {
@@ -21,9 +23,16 @@ angular.module('mw.app')
       sidebar: {
         active: true
       }
-    })
-    ;
+    });
+
     $rootScope.toggleSidebar = function (toggle) {
       $rootScope.sidebar.active = toggle;
     }
+
+    Ps.initialize(scrollingContainer);
+
+    $rootScope.$on('$stateChangeSuccess', function () {
+      scrollingContainer.scrollTop = 0;
+      Ps.update(scrollingContainer);
+    });
   }]);

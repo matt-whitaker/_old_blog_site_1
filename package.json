@@ -45,6 +45,7 @@
     "gulp-traceur": "^0.17.1",
     "gulp-uglify": "^1.2.0",
     "gulp-webserver": "^0.9.1",
+    "gulp-zip": "^3.1.0",
     "lodash": "^3.10.1",
     "main-bower-files": "^2.9.0",
     "prettyjson": "^1.1.3",

@@ -26,6 +26,7 @@ var uglify      = require('gulp-uglify');
 var gif         = require('gulp-if');
 var rename      = require('gulp-rename');
 var minifyCss   = require('gulp-minify-css');
+var zip         = require('gulp-zip');
 
 // Custom
 var angularify   = require('./tasks/angularify.js');
@@ -49,6 +50,7 @@ var BUILD_NAME = 'disjointedthinking';
 var WORKING_DIRECTORY = process.cwd() + '/';
 
 var DIST_PATH_ROOT = 'dist/' + BUILD_NAME + '/';
+var DEPLOY_PATH_ROOT = 'dist/';
 
 var IMAGE_SRC_PATH = 'assets/images/';
 var SCRIPTS_SRC_PATH = 'scripts/';
@@ -112,7 +114,7 @@ gulp.task('build-templates', ['clean-templates'], function () {
 
 // =========== END TEMPLATES TASKS
 
-
+DIST_PATH_ROOT
 
 // =========== IMAGE TASKS
 
@@ -245,6 +247,17 @@ gulp.task('build-css', ['clean-css'], function () {
 
 // =========== END CSS TASKS
 
+gulp.task('clean-deploy', function () {
+  return del([
+    DEPLOY_PATH_ROOT + BUILD_NAME + '.zip'
+  ]);
+});
+
+gulp.task('build-deploy', ['clean-deploy'], function () {
+  return gulp.src(DIST_PATH_ROOT + '*/**')
+    .pipe(zip(BUILD_NAME + '.zip'))
+    .pipe(gulp.dest(DEPLOY_PATH_ROOT));
+});
 
 gulp.task('clean-link', function () {
   return del([
@@ -277,7 +290,7 @@ gulp.task('build-all', function () {
       'build-templates'
     ],
     'build-index'
-  )
+  );
 });
 
 gulp.task('build-app', ['build-all']);

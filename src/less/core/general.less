@@ -29,9 +29,13 @@ html, body {
   -webkit-text-stroke-width: .4px;
 }
 
-body > div {
+body .app-wrapper {
   position: relative;
   height: 100vh;
+
+  > .ps-scrollbar-y-rail {
+    right: @mw-sidebar-width + 5px;
+  }
 }
 
 h1, h2, h3, h4, p {

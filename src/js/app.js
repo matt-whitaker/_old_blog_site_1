@@ -10,7 +10,7 @@ angular.module('mw.app')
     window.Dev = {};
   }])
   .run(['$rootScope', '$document', function ($rootScope, $document) {
-    var scrollingContainer = angular.element($document[0].body).children('div').first()[0];
+    var scrollingContainer = angular.element($document[0].body).children('div').first();
 
     // configs
     angular.extend($rootScope, {
@@ -27,12 +27,11 @@ angular.module('mw.app')
 
     $rootScope.toggleSidebar = function (toggle) {
       $rootScope.sidebar.active = toggle;
-    }
+    };
 
-    Ps.initialize(scrollingContainer);
+    scrollingContainer.perfectScrollbar();
 
     $rootScope.$on('$stateChangeSuccess', function () {
-      scrollingContainer.scrollTop = 0;
-      Ps.update(scrollingContainer);
+      scrollingContainer.scrollTop(0).perfectScrollbar('update');
     });
   }]);

@@ -23,7 +23,7 @@ angular.module('mw.sidebar.sidebar', [])
             $state.go('search', { q: scope.search.query }, { inherit: false });
           };
 
-          Ps.initialize(scrollingContainer[0]);
+          scrollingContainer.perfectScrollbar();
         }
       }
     }

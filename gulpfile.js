@@ -114,7 +114,7 @@ gulp.task('build-templates', ['clean-templates'], function () {
 
 // =========== END TEMPLATES TASKS
 
-DIST_PATH_ROOT
+
 
 // =========== IMAGE TASKS
 
@@ -294,7 +294,6 @@ gulp.task('build-all', function () {
 });
 
 gulp.task('build-app', ['build-all']);
-
 
 gulp.task('watch-all', ['build-all'], function () {
   gulp.watch([

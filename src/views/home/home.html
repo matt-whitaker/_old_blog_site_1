@@ -1,57 +1,42 @@
-<article class="mw-home" ng-if="!loading">
-    <header>
-        <div class="header-row">
-            <div class="avatar">
+<div class="mw-home" ng-if="!loading">
+    <main class="mw-home-content">
+        <div class="home-sidebar">
+            <div class="avatar" >
                 <img src="/wp-content/themes/disjointedthinking/images/avatar.png" />
             </div>
+            <div class="category-cta">
+                <p>
+                    <strong>Let's talk about the web.</strong>
+                    <span>Checkout one of these categories to read my ramblings about web development, user experience, and visualizing information.</span>
+                </p>
+                <ul>
+                    <li><a ui-sref="search({ c: 'angular' })">Angular</a></li>
+                </ul>
+            </div>
+            <div class="category-cta disabled">
+                <p>
+                    <strong>Coming soon... </strong>
+                    <span>I will be posting reviews of various places and breweries I've visited, check back here in the future to see where I've been!</span>
+                </p>
+                <ul>
+                    <!--<li>Web Development</li>-->
+                </ul>
+            </div>
         </div>
-    </header>
-    <main class="mw-home-content">
-        <section class="subject">
-            <p>
-                Inventore veritatis et quasi architecto beatae vitae dicta sunt explicabo. Et iusto odio dignissimos ducimus qui blanditiis praesentium voluptatum deleniti atque. Cupiditate non provident, similique sunt in culpa qui officia deserunt mollitia.
-            </p>
-
-            <p>
-                At vero eos et accusamus. Eaque ipsa quae ab illo inventore veritatis et quasi. Qui officia deserunt mollit anim id est laborum. Excepteur sint occaecat cupidatat non proident, sunt in culpa. Ut aut reiciendis voluptatibus maiores alias consequatur aut perferendis doloribus asperiores repellat.
-            </p>
-        </section>
-
-        <section class="subject">
-            <div class="subject-icon"><i class="fa fa-3x fa-code"></i></div>
-            <p>
-                <strong>Let's talk about code.</strong>
-                By day, I am a software engineer. I focus my experience in front-end development and user experience, but I try to diversify my interests. Checkout one of these categories to read my ramblings about web development, user experience, and visualizing information. 
-            </p>
-
-            <div class="category-row">
-                <div><a ui-sref="search({ c: 'web-development'})">Web Development</a></div>
-                <div><a ui-sref="search({ c: 'node-js'})">Node.js</a></div>
-                <div><a ui-sref="search({ c: 'angular-js'})">Angular.js</a></div>
+        <div class="home-main">
+            <div class="home-banner">
+                <i class="fa fa-exclamation-triangle"></i> I wrote this Wordpress theme from scratch! <a ui-sref="blog({ slug: 'angular-wordpress' })">See how I did it</a>!
             </div>
-        </section> 
 
-        <section class="subject">
-            <div class="subject-icon"><i class="fa fa-3x fa-map-marker"></i></div>
-            <p>
-                <strong>Do you like to travel?</strong>
-                Living in the city has its perks, but I definitely need my breaks. I love to travel around in search of interesting hikes, breweries, and food. If you're looking for a recommendation, try one of these categories.
-            </p>
-
-            <div class="category-row">
-                <div><a ui-sref="search({ c: 'breweries'})">Breweries</a></div>
-                <div><a ui-sref="search({ c: 'nature'})">Nature</a></div>
-                <div><a ui-sref="search({ c: 'eating'})">Eating</a></div>
+            <h1>Featured Post</h1>
+            <div ng-if="recent && recent[0]">
+                <h3>{{ recent[0].title }}</h3>
+                <time>{{ recent[0].moment | prettyDate }}</time>
+                <div class="mw-post">
+                    <div bind-html="recent[0].preview"></div>
+                    <a ui-sref="blog({ slug: recent[0].name })">Read the rest</a>
+                </div>
             </div>
-        </section>
-
-        <section class="subject">
-            <div class="category-row">
-                <div><a class="fa fa-yelp fa-2x" target="_blank" href="http://mattwhitaker.yelp.com"></a></div>
-                <div><a class="fa fa-linkedin-square fa-2x" target="_blank" href="https://www.linkedin.com/in/whitakermatt"></a></div>
-                <div><a class="fa fa-git fa-2x" target="_blank" href="https://bitbucket.org/matt-whitaker/"></a></div>
-            </div>
-        </section>
+        </div>
     </main>
-    <footer></footer>
-</article>
+</div>

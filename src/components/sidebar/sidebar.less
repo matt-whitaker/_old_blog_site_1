@@ -14,6 +14,9 @@
   background-image: @sidebar-background-image;
   color: @mw-color-swatch-3-1;
 
+  @-moz-document url-prefix() {
+    text-shadow: none;
+  }
 
   transform: translate(100%);
   transition: transform 100ms linear;

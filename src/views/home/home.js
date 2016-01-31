@@ -2,17 +2,14 @@
 
 angular.module('mw.home.home', [])
   .controller('HomeController', [
-    '$scope', 'pagesService',
-    function ($scope, pagesService) {
+    '$scope', 'blogsService',
+    function ($scope, blogsService) {
       $scope.loaded = false;
 
-      pagesService.findBySlug('home').then(function (page) {
-        if (page) {
-          $scope.loaded = true;
-          $scope.title = page.title;
-          $scope.content = page.content;
-        }
-      });
+      blogsService.getRecent()
+        .then(function (recent) {
+          $scope.recent = recent;
+        })
     }
   ])
   .config(['$stateProvider', function ($stateProvider) {

@@ -1,84 +1,160 @@
 .mw-home {
-  header {
-    // border-bottom: 1px dotted @mw-color-swatch-2-light-2;
-    padding-bottom: 15px;
-
-    .header-row {
-      display: flex;
-
-      div {
-        flex-grow: 1;
-        text-align: right;
-      }
-
-      .avatar {
-        img {
-          width: 120px;
-          height: auto;
-          margin: 0 auto;
-          display: block;
-        }
-      }
-    }
-  }
+  display: flex;
 
   main {
     width: 70%;
     margin: 0 auto;
+    display: flex;
+    //align-items: center;
 
-    .subject {
-      margin: 15px 0;
-      position: relative;
+    .home-sidebar {
+      flex-basis: 30%;
 
-      padding-bottom: 15px;
+      border-right: 1px dotted @mw-color-swatch-2-light-1;
 
-      border-bottom: 1px dotted @mw-color-swatch-2-light-1;
-
-      &:last-child {
-        padding-top: 15px;
-        border-bottom: none;
+      > div {
+        margin: 60px 0;
       }
 
-      h3 {
-        margin-top: 15px;
-      }
+      .category-cta {
+        padding: 0 20px;
 
-      p {
-        margin: 15px 0;
+        p, ul {
+          margin: 15px 0;
+        }
+
+        ul {
+          display: flex;
+          justify-content: center;
+
+          li {
+            flex-grow: 1;
+            flex-basis: 33%;
+            text-align: center;
+
+            a {
+              color: fadeout(@mw-color-swatch-1-light-1, 20%);
+
+              cursor: pointer;
+              .mw-highlight-1;
+              font-weight: 400;
+            }
+          }
+        }
+
+        &.disabled {
+          pointer-events: none;
+          opacity: .5;
+        }
       }
     }
 
-    .subject-icon {
-      position: absolute;
-      color: @mw-color-swatch-2-1;
-      top: 50%;
-      transform: translateY(-50%);
-      width: 100px;
+    .home-main {
+      flex-basis: 70%;
+      padding: 0 30px;
+      overflow: hidden;
+
+      > h1 {
+        padding-bottom: 15px;
+        margin-bottom: 15px;
+        border-bottom: 1px dotted @mw-color-swatch-2-light-1;
+      }
+
+      > div {
+        margin-bottom: 30px;
+      }
+
+      .mw-post {
+
+        padding-bottom: 15px;
+      }
+    }
+
+    .avatar {
       text-align: center;
-      left: -100px;
+
+      img {
+        width: 120px;
+        height: auto;
+      }
     }
 
-    .social-row {
-      font-size: 1.4em;
-    }
+    .home-banner {
+      padding: 15px;
+      color: @mw-color-swatch-2-light-2;
+      background-color: fadeout(@mw-color-swatch-2-dark-1, 10%);
 
-    .category-row, .social-row {
-      color: fadeout(@mw-color-swatch-1-light-1, 20%);
-      margin-top: 15px;
-      display: flex;
-      justify-content: center;
+      font-smooth: always;
+      -webkit-font-smoothing: antialiased;
+      -webkit-text-stroke-width: .8px;
 
-      div {
-        width: 33.3%;
-        flex-basis: 33.3%;
-        overflow: visible;
-        text-align: center;
-        flex: 1 1;
+      .light;
+
+      i {
+        color: fadeout(@mw-color-swatch-1-light-1, 20%);
+        margin-right: 15px;
       }
 
       a {
-        .mw-highlight-1
+        color: fadeout(@mw-color-swatch-1-light-1, 20%);
+
+        .mw-highlight-1;
       }
     }
+
+//.subject {
+//  margin: 15px 0;
+//  position: relative;
+//
+//  padding-bottom: 15px;
+//
+//  border-bottom: 1px dotted @mw-color-swatch-2-light-1;
+//
+//  &:last-child {
+//    padding-top: 15px;
+//    border-bottom: none;
+//  }
+//
+//  h3 {
+//    margin-top: 15px;
+//  }
+//
+//  p {
+//    margin: 15px 0;
+//  }
+//}
+//
+//.subject-icon {
+//  position: absolute;
+//  color: @mw-color-swatch-2-1;
+//  top: 50%;
+//  transform: translateY(-50%);
+//  width: 100px;
+//  text-align: center;
+//  left: -100px;
+//}
+//
+//.social-row {
+//  font-size: 1.4em;
+//}
+//
+//.category-row, .social-row {
+//  color: fadeout(@mw-color-swatch-1-light-1, 20%);
+//  margin-top: 15px;
+//  display: flex;
+//  justify-content: center;
+//
+//  div {
+//    width: 33.3%;
+//    flex-basis: 33.3%;
+//    overflow: visible;
+//    text-align: center;
+//    flex: 1 1;
+//  }
+//
+//  a {
+//    .mw-highlight-1
+//  }
+//}/}
   }
 }

@@ -5,7 +5,11 @@ angular.module('mw.directives.utils.bind-html', [])
     return {
       priority: 1,
       restrict: 'A',
-      scope: {'html': '=bindHtml', 'preprocess': '='},
+      scope: {
+        html: '=bindHtml',
+        preprocess: '=',
+        postprocess: '=',
+      },
       link: function (scope, elem, attrs) {
         var articleScope = scope.$new(),
           articleHtml;
@@ -22,6 +26,11 @@ angular.module('mw.directives.utils.bind-html', [])
 
             html = '<div>' + html + '</div>';
             articleHtml = $compile(html)(articleScope);
+
+            if (scope.postprocess && scope.postprocess instanceof Function) {
+              articleHtml = scope.postprocess.call(this, articleHtml);
+            }
+
             elem.empty().append(articleHtml);
           } else {
             elem.empty().html(null);

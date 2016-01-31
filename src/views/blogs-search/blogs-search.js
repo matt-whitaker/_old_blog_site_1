@@ -5,9 +5,9 @@ function tokenize (query) {
 }
 
 function processExcerpt (excerpt) {
-  if (['!', '.', '?'].indexOf(excerpt[excerpt.length - 1]) === -1) {
-    return excerpt + '...';
-  }
+  //if (['!', '.', '?'].indexOf(excerpt[excerpt.length - 1]) === -1) {
+  //  return excerpt + '...';
+  //}
 
   return excerpt;
 }
@@ -46,7 +46,13 @@ angular.module('mw.blogs-search.blogs-search', [])
 
           $scope.loading = false;
           $rootScope.$emit('loading', false);
-        })
+        });
+
+
+      $scope.postprocess = function (html) {
+        html.find("a").contents().unwrap().wrap('<span class="was-anchor"></span>');
+        return html;
+      };
     }
   ])
   .config(['$stateProvider', function ($stateProvider) {

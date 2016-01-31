@@ -16,9 +16,7 @@
                 </div>
                 <div class="detail-cell">
                     <h2>{{ model.title }}&nbsp;</h2>
-                    <p>
-                        {{ model.excerpt }}
-                    </p>
+                    <div bind-html="model.excerpt" postprocess="postprocess" class="mw-post"></div>
                 </div>
             </a>
         </section>

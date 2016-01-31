@@ -2,17 +2,18 @@
 
 ##### Get Archive #####
 function get_archive($data) {
-    function extract_excerpt ($content, $maxLength) {
-        $content = substr(strip_tags($content), 0, $maxLength);
+    function extract_excerpt ($content) {
+        $content = get_extended($content);
         return $content;
     }
 
-    function parse($item)
-    {
+    function parse($item) {
+        $preview = extract_excerpt($item->content);
+
         return array(
             title       => $item->title,
             name        => $item->name,
-            excerpt     => extract_excerpt($item->content, 220),
+            excerpt     => $preview['main'],
             year        => intval($item->year),
             month       => intval($item->month),
             day         => intval($item->day)

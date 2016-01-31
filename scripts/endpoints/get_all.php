@@ -7,15 +7,14 @@ function get_all($data) {
         return get_category($c_id);
     }
 
-    function extract_excerpt ($content, $maxLength) {
-        $content = substr(strip_tags($content), 0, $maxLength);
-
+    function extract_excerpt ($content) {
+        $content = get_extended($content);
         return $content;
     }
 
     # id, slug, title, content, date
     function parse ($item) {
-        $excerpt = extract_excerpt($item->post_content, 220);
+        $excerpt = extract_excerpt($item->post_content);
         $tags = wp_get_post_tags($item->ID);
         $categories = array_map('extract_category', wp_get_post_categories($item->ID));
 
@@ -24,7 +23,7 @@ function get_all($data) {
             slug        => $item->post_name,
             title       => $item->post_title,
             content     => $item->post_content,
-            excerpt     => $excerpt,
+            excerpt     => $excerpt['main'],
             date        => $item->post_date,
             tags        => $tags,
             categories    => $categories

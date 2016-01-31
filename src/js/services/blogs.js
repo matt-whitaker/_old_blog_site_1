@@ -93,9 +93,10 @@ angular.module('mw.services.blogs', [])
                 .take(4)
                 .map(function (post) {
                   return {
-                    title: post.post_title,
-                    name: post.post_name,
-                    moment: moment(post.post_date, "YYYY-MM-DD HH:MM:SS")
+                    title: post.title,
+                    name: post.name,
+                    moment: moment(post.date.split(' '), "YYYY-MM-DD"),
+                    preview: post.preview
                   }
                 }).value() : [];
             });

@@ -9,16 +9,17 @@
     </header>
     <main>
         <section class="archi" ng-repeat="model in models">
-            <a ui-sref="blog({ slug: model.name })">
-                <div class="calendar-cell">
-                    <span class="day-num">{{ model.day }}</span>
-                    <i class="fa fa-calendar-o fa-2x"></i>
+            <div class="calendar-cell">
+                <span class="day-num">{{ model.day }}</span>
+                <i class="fa fa-calendar-o fa-2x"></i>
+            </div>
+            <div class="detail-cell">
+                <h2>{{ model.title }}&nbsp;</h2>
+                <div class="mw-post">
+                    <div bind-html="model.excerpt" postprocess="postprocess"></div>
+                    <a ui-sref="blog({ slug: model.name })">Read the rest</a>
                 </div>
-                <div class="detail-cell">
-                    <h2>{{ model.title }}&nbsp;</h2>
-                    <div bind-html="model.excerpt" postprocess="postprocess" class="mw-post"></div>
-                </div>
-            </a>
+            </div>
         </section>
     </main>
 </article>

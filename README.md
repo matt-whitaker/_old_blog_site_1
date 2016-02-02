@@ -20,3 +20,6 @@ My personal blog and code playground.
 
 # Reminders #
 * post format
+
+# Notes for readers #
+branch: design-architect is the current "in development" branch.

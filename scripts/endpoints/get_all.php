@@ -26,16 +26,14 @@ function get_all($data) {
             excerpt     => $excerpt['main'],
             date        => $item->post_date,
             tags        => $tags,
-            categories    => $categories
+            categories  => $categories
         );
     }
 
     $posts =  null;
     if ($data['category']) {
-        error_log($data['category']);
         $posts = get_posts('category_name=' . $data['category']);
     } else if ($data['tag']) {
-        error_log($data['tag']);
         $posts = get_posts('tag=' . $data['tag']);
 
     } else if ($data['query']) {

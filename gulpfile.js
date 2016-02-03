@@ -194,7 +194,7 @@ gulp.task('build-js', ['clean-js'], function () {
       })
 
       // Prod
-      .pipe(gif(argv.prod, rename({ suffix: '.min' })))
+      //.pipe(gif(argv.prod, rename({ suffix: '.min' })))
       .pipe(gif(argv.prod, uglify()))
       // End Prod
 

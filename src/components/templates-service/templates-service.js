@@ -1,6 +1,6 @@
 "use strict";
 
-angular.module('mw.templates-service.templates-service', [])
+angular.module('mw.templates-service', [])
   .factory('templatesService', [
     '$templateCache', '$http',
     function ($templateCache, $http) {

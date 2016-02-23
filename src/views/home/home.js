@@ -1,6 +1,6 @@
 "use strict";
 
-angular.module('mw.home.home', [])
+angular.module('mw.home', [])
   .controller('HomeController', [
     '$scope', 'blogsService',
     function ($scope, blogsService) {

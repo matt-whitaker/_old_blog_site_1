@@ -1,6 +1,6 @@
 "use strict";
 
-angular.module('mw.toolbar.toolbar', [])
+angular.module('mw.toolbar', [])
 
   .directive('toolbar', [
     '$q', '$http', 'templatesBase', '$rootScope',

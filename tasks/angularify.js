@@ -30,7 +30,14 @@ module.exports = function angularify (config) {
     var isView = file.path.indexOf('/views') > -1;
 
     var relativePath = file.path.replace(file.base, '');
-    var moduleName = 'mw.{0}'.format(relativePath.replace('.js', '').split(path.sep).join('.'));
+    var modulePieces = relativePath.replace('.js', '').split(path.sep);
+
+    // If the last piece is identical to the second to last, collapse.
+    if (modulePieces[modulePieces.length - 1] === modulePieces[modulePieces.length - 2]) {
+      modulePieces.pop();
+    }
+
+    var moduleName = 'mw.{0}'.format(modulePieces.join('.'));
 
     if (relativePath === config.root) {
       appFile = file;

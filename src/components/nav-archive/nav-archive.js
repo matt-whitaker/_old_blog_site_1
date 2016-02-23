@@ -1,6 +1,6 @@
 "use strict";
 
-angular.module('mw.nav-archive.nav-archive', [])
+angular.module('mw.nav-archive', [])
 
   .directive('navArchive', [
     '$q', '$http', 'templatesBase', 'archiveService',

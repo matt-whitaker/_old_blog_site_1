@@ -1,6 +1,6 @@
 "use strict";
 
-angular.module('mw.page.page', [])
+angular.module('mw.page', [])
 
   .directive('page', [
     '$q', '$http', 'templatesBase',

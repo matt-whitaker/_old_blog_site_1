@@ -1,6 +1,6 @@
 "use strict";
 
-angular.module('mw.post-search.post-search', [])
+angular.module('mw.post-search', [])
   .directive('postSearch', [
     '$q', '$http', '$state', 'templatesBase', 'blogsService',
     function ($q, $http, $state, templatesBase, blogsService) {

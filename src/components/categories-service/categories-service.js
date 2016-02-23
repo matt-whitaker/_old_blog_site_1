@@ -1,6 +1,6 @@
 "use strict";
 
-angular.module('mw.categories-service.categories-service', [])
+angular.module('mw.categories-service', [])
   .factory('categoriesService', [
     '$http', 'customApiBase', 'apiBase',
     function ($http, customApiBase, apiBase) {

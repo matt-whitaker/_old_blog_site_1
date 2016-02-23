@@ -12,7 +12,7 @@ function processExcerpt (excerpt) {
   return excerpt;
 }
 
-angular.module('mw.blogs-search.blogs-search', [])
+angular.module('mw.blogs-search', [])
   .controller('BlogsSearchController', [
     '$rootScope', '$scope', '$state', 'blogsService',
     function ($rootScope, $scope, $state, blogsService) {

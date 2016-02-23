@@ -1,6 +1,6 @@
 "use strict";
 
-angular.module('mw.blog.blog', [])
+angular.module('mw.blog', [])
   .controller('BlogController', [
     '$rootScope', '$scope', '$state', '$sce', '$compile', 'blogsService',
     function ($rootScope, $scope, $state, $sce, $compile, blogsService) {

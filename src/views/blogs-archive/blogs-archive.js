@@ -8,7 +8,7 @@ function processExcerpt (excerpt) {
   return excerpt;
 }
 
-angular.module('mw.blogs-archive.blogs-archive', [])
+angular.module('mw.blogs-archive', [])
   .controller('BlogsArchiveController', [
     '$rootScope', '$scope', 'blogsService', '$state', 'archiveService',
     function ($rootScope, $scope, blogsService, $state, archiveService) {

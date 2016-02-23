@@ -1,6 +1,6 @@
 "use strict";
 
-angular.module('mw.nav-recent.nav-recent', [])
+angular.module('mw.nav-recent', [])
 
   .directive('navRecent', [
     '$q', '$http', 'templatesBase', 'blogsService',

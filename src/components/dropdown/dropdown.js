@@ -1,6 +1,6 @@
 "use strict";
 
-angular.module('mw.dropdown.dropdown', [])
+angular.module('mw.dropdown', [])
   .directive('dropdown', [
     'templatesBase',
     function (templatesBase) {

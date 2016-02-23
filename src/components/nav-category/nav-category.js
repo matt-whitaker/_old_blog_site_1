@@ -1,6 +1,6 @@
 "use strict";
 
-angular.module('mw.nav-category.nav-category', [])
+angular.module('mw.nav-category', [])
 
   .directive('navCategory', [
     '$q', '$http', 'templatesBase', 'categoriesService',

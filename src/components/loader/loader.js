@@ -1,6 +1,6 @@
 "use strict";
 
-angular.module('mw.loader.loader', [])
+angular.module('mw.loader', [])
   .directive('loader', [
     '$rootScope',
     function ($rootScope) {

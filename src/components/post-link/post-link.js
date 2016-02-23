@@ -1,6 +1,6 @@
 "use strict";
 
-angular.module('mw.post-link.post-link', [])
+angular.module('mw.post-link', [])
 
   .directive('postLink', [
 

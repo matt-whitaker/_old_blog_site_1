@@ -1,6 +1,6 @@
 "use strict";
 
-angular.module('mw.sidebar.sidebar', [])
+angular.module('mw.sidebar', [])
 
   .directive('sidebar', [
     '$q', '$http', '$state', 'templatesBase', 'blogsService', '$location',

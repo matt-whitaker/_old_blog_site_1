@@ -1,6 +1,6 @@
 "use strict";
 
-angular.module('mw.services.archive', [])
+angular.module('mw.archive-service.archive-service', [])
   .factory('archiveService', [
     '$http', 'customApiBase',
     function ($http, customApiBase) {

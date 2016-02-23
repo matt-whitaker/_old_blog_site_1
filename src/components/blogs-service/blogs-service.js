@@ -26,7 +26,7 @@ function processFindAll (result) {
   }) : [];
 }
 
-angular.module('mw.services.blogs', [])
+angular.module('mw.blogs-service.blogs-service', [])
   .factory('blogsService', [
     '$http', 'apiBase', 'customApiBase',
     function ($http, apiBase, customApiBase) {

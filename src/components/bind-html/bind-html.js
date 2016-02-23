@@ -1,6 +1,6 @@
 "use strict";
 
-angular.module('mw.directives.utils.bind-html', [])
+angular.module('mw.bind-html.bind-html', [])
   .directive('bindHtml', ['$compile', function ($compile) {
     return {
       priority: 1,

@@ -1,6 +1,6 @@
 "use strict";
 
-angular.module('mw.services.taxonomies', [])
+angular.module('mw.taxonomies-service.taxonomies-service', [])
   .service('taxonomiesService', [
     '$http', 'apiBase', 'customApiBase',
     function ($http, apiBase, customApiBase) {

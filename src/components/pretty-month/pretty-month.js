@@ -1,6 +1,6 @@
 "use strict";
 
-angular.module('mw.filters.prettyMonth', [])
+angular.module('mw.pretty-month.pretty-month', [])
   .filter('prettyMonth', function () {
     return function (moment) {
       return moment.format("MMMM");

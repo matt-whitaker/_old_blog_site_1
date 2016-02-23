@@ -1,6 +1,6 @@
 "use strict";
 
-angular.module('mw.services.pages', [])
+angular.module('mw.pages-service.pages-service', [])
   .factory('pagesService', [
     '$http', 'customApiBase',
     function ($http, customApiBase) {

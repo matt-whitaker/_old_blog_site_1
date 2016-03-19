@@ -8,24 +8,24 @@ angular.module('mw.archive-service', [])
         '$http': $http,
         customApiBase: customApiBase,
 
-        getMonths: function () {
-          return this.$http.get(this.customApiBase + 'archive/months', { cache: true })
+        getMonths () {
+          return this.$http.get(`${this.customApiBase}archive/months`, { cache: true })
             .then(function (result) {
               var dates = result.data;
 
               return dates.length ? _(dates)
-                .map(function (date) {
+                .map((date) => {
                   return {
                     year: date.year,
                     month: date.month,
-                    moment: moment(date.year + "-" + date.month, 'YYYY-MM')
+                    moment: moment(`${date.year}-${date.month}`, 'YYYY-MM')
                   };
                 })
                 .value() : [];
             });
         },
 
-        getArchive: function (year, month) {
+        getArchive (year, month) {
           if (!parseInt(year) || !parseInt(month)) {
             throw("Must provide year and month");
           }
@@ -33,7 +33,7 @@ angular.module('mw.archive-service', [])
           year = parseInt(year);
           month = parseInt(month);
 
-          return this.$http.get(this.customApiBase + 'archive', { cache: true, params: { year: year, month: month } })
+          return this.$http.get(`${this.customApiBase}archive`, { cache: true, params: { year: year, month: month } })
             .then(function (result) {
               var posts = result.data;
               return posts.length ? _(posts)
@@ -42,7 +42,7 @@ angular.module('mw.archive-service', [])
                 })
                 .map(function (datum) {
                   return {
-                    moment: moment(""+datum.year+"-"+datum.month+"-"+datum.day, "YYYY-MM-DD"),
+                    moment: moment(`${datum.year}-${datum.month}-${datum.day}`, "YYYY-MM-DD"),
                     year: datum.year,
                     month: datum.month,
                     day: datum.day,

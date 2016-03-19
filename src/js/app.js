@@ -10,7 +10,7 @@ angular.module('mw.app')
     window.Dev = {};
   }])
   .run(['$rootScope', '$document', function ($rootScope, $document) {
-    var scrollingContainer = angular.element($document[0].body).children('div').first();
+    let scrollingContainer = angular.element($document[0].body).children('div').first();
 
     // configs
     angular.extend($rootScope, {
@@ -31,7 +31,7 @@ angular.module('mw.app')
 
     scrollingContainer.perfectScrollbar();
 
-    $rootScope.$on('$stateChangeSuccess', function () {
+    $rootScope.$on('$stateChangeSuccess', () => {
       scrollingContainer.scrollTop(0).perfectScrollbar('update');
     });
   }]);

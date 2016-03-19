@@ -8,17 +8,18 @@ angular.module('mw.bind-html', [])
       scope: {
         html: '=bindHtml',
         preprocess: '=',
-        postprocess: '=',
+        postprocess: '='
       },
-      link: function (scope, elem, attrs) {
-        var articleScope = scope.$new(),
+      link (scope, elem, attrs) {
+        let articleScope = scope.$new(),
           articleHtml;
 
         bind();
         scope.$watch('html', bind);
 
         function bind() {
-          var html = scope.html;
+          let html = scope.html;
+
           if (html) {
             if (scope.preprocess && scope.preprocess instanceof Function) {
               html = scope.preprocess.call(this, html);

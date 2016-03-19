@@ -3,34 +3,38 @@
 // =========== DEPENDENCIES
 
 // System
-var path        = require('path');
+const path        = require('path');
 
 // Utils
-var es          = require('event-stream');
-var prettyJson  = require('prettyjson');
-var through2    = require('through2');
-var del         = require('del');
-var _           = require('lodash');
-var bowerFiles  = require('main-bower-files');
-var argv        = require('yargs').argv;
-var sequence    = require('run-sequence');
+const es          = require('event-stream');
+const prettyJson  = require('prettyjson');
+const through2    = require('through2');
+const del         = require('del');
+const _           = require('lodash');
+const bowerFiles  = require('main-bower-files');
+const argv        = require('yargs').argv;
+const sequence    = require('run-sequence');
+const babelify       = require('babelify');
+
 
 // Gulp
-var gulp        = require('gulp');
-var flatten     = require('gulp-flatten');
-var browserify  = require('gulp-browserify');
-var less        = require('gulp-less');
-var template    = require('gulp-template');
-var symlink     = require('gulp-sym');
-var uglify      = require('gulp-uglify');
-var gif         = require('gulp-if');
-var rename      = require('gulp-rename');
-var minifyCss   = require('gulp-minify-css');
-var zip         = require('gulp-zip');
+const gulp        = require('gulp');
+const flatten     = require('gulp-flatten');
+const browserify  = require('gulp-browserify');
+const less        = require('gulp-less');
+const template    = require('gulp-template');
+const symlink     = require('gulp-sym');
+const uglify      = require('gulp-uglify');
+const gif         = require('gulp-if');
+const rename      = require('gulp-rename');
+const minifyCss   = require('gulp-minify-css');
+const zip         = require('gulp-zip');
+const webpack     = require('gulp-webpack');
+const babel       = require('gulp-babel');
 
 // Custom
-var angularify   = require('./tasks/angularify.js');
-var bindOutput   = require('./tasks/bindOutput.js');
+const angularify   = require('./tasks/angularify.js');
+const bindOutput   = require('./tasks/bindOutput.js');
 
 // =========== END DEPENDENCIES
 
@@ -46,29 +50,29 @@ var pkg         = require('./package.json');
 
 // =========== PATHS
 
-var BUILD_NAME = 'disjointedthinking';
-var WORKING_DIRECTORY = process.cwd() + '/';
+const BUILD_NAME = 'disjointedthinking';
+const WORKING_DIRECTORY = process.cwd() + '/';
 
-var DIST_PATH_ROOT = 'dist/' + BUILD_NAME + '/';
-var DEPLOY_PATH_ROOT = 'dist/';
+const DIST_PATH_ROOT = 'dist/' + BUILD_NAME + '/';
+const DEPLOY_PATH_ROOT = 'dist/';
 
-var IMAGE_SRC_PATH = 'assets/images/';
+const IMAGE_SRC_PATH = 'assets/images/';
 var SCRIPTS_SRC_PATH = 'scripts/';
 
-var COMPONENTS_SRC_PATH = 'src/components/';
-var VIEWS_SRC_PATH = 'src/views/';
-var TEMPLATES_SRC_PATH = 'src/templates/';
-var LESS_SRC_PATH = 'src/less/';
-var JS_SRC_PATH = 'src/js/';
+const COMPONENTS_SRC_PATH = 'src/components/';
+const VIEWS_SRC_PATH = 'src/views/';
+const TEMPLATES_SRC_PATH = 'src/templates/';
+const LESS_SRC_PATH = 'src/less/';
+const JS_SRC_PATH = 'src/js/';
 
-var IMAGE_DIST_PATH = DIST_PATH_ROOT + 'images/';
-var SCRIPTS_DIST_PATH = DIST_PATH_ROOT;
+const IMAGE_DIST_PATH = DIST_PATH_ROOT + 'images/';
+const SCRIPTS_DIST_PATH = DIST_PATH_ROOT;
 
-var TEMPLATES_DIST_PATH = DIST_PATH_ROOT + 'templates/';
-var CSS_DIST_PATH = DIST_PATH_ROOT;
-var JS_DIST_PATH = DIST_PATH_ROOT + 'js/';
+const TEMPLATES_DIST_PATH = DIST_PATH_ROOT + 'templates/';
+const CSS_DIST_PATH = DIST_PATH_ROOT;
+const JS_DIST_PATH = DIST_PATH_ROOT + 'js/';
 
-var WP_THEME_PATH  = 'wordpress/wp-content/themes/' + BUILD_NAME + '/';
+const WP_THEME_PATH  = 'wordpress/wp-content/themes/' + BUILD_NAME + '/';
 
 // =========== END PATHS
 
@@ -175,6 +179,7 @@ gulp.task('build-js', ['clean-js'], function () {
       WORKING_DIRECTORY + COMPONENTS_SRC_PATH + '**/*.js',
       WORKING_DIRECTORY + VIEWS_SRC_PATH + '**/*.js'
     ])
+      //.pipe(babel())
       .pipe(angularify({
         root: 'app.js',
         module: 'mw.app',
@@ -184,9 +189,30 @@ gulp.task('build-js', ['clean-js'], function () {
           'ngScrollSpy'
         ]
       }))
+      //.pipe(webpack({
+      //  output: {
+      //    filename: 'app.js',
+      //  }
+      //}))
+      //.pipe(through2.obj(function (file, encoding, cb) {
+      //  return webpack({
+      //    entry: "./main.js",
+      //    output: {
+      //      filename: "bundle.js"
+      //    }
+      //  }, function(err, stats) {
+      //    err // => fatal compiler error (rar)
+      //    var json = stats.toJson() // => webpack --json
+      //    json.errors // => array of errors
+      //    json.warnings // => array of warnings
+      //  });
+      //}))
       .pipe(browserify({
         insertGlobals : true,
-        debug : !argv.prod
+        debug : !argv.prod,
+        transform: [babelify.configure({
+          presets: ["es2015"]
+        })]
       }))
       .on('error', function (error) {
         console.log(error.toString());

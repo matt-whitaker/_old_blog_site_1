@@ -14,7 +14,7 @@ const _           = require('lodash');
 const bowerFiles  = require('main-bower-files');
 const argv        = require('yargs').argv;
 const sequence    = require('run-sequence');
-const babelify       = require('babelify');
+const babelify    = require('babelify');
 
 
 // Gulp
@@ -33,8 +33,8 @@ const webpack     = require('gulp-webpack');
 const babel       = require('gulp-babel');
 
 // Custom
-const angularify   = require('./tasks/angularify.js');
-const bindOutput   = require('./tasks/bindOutput.js');
+const angularify  = require('./tasks/angularify.js');
+const bindOutput  = require('./tasks/bindOutput.js');
 
 // =========== END DEPENDENCIES
 
@@ -42,7 +42,7 @@ const bindOutput   = require('./tasks/bindOutput.js');
 
 // =========== ENVIRONMENT
 
-var pkg         = require('./package.json');
+const pkg           = require('./package.json');
 
 // =========== END ENVIRONMENT
 
@@ -57,7 +57,7 @@ const DIST_PATH_ROOT = 'dist/' + BUILD_NAME + '/';
 const DEPLOY_PATH_ROOT = 'dist/';
 
 const IMAGE_SRC_PATH = 'assets/images/';
-var SCRIPTS_SRC_PATH = 'scripts/';
+const SCRIPTS_SRC_PATH = 'scripts/';
 
 const COMPONENTS_SRC_PATH = 'src/components/';
 const VIEWS_SRC_PATH = 'src/views/';
@@ -77,17 +77,17 @@ const WP_THEME_PATH  = 'wordpress/wp-content/themes/' + BUILD_NAME + '/';
 // =========== END PATHS
 
 
-var TEMPLATE_VM = { JS: {}, CSS: {} };
+let TEMPLATE_VM = { JS: {}, CSS: {} };
 
 // =========== INDEX TASKS
 
-gulp.task('clean-index', function () {
+gulp.task('clean-index', () => {
   return del([
     DIST_PATH_ROOT + 'index.php'
   ])
 });
 
-gulp.task('build-index', function () {
+gulp.task('build-index', () => {
   return gulp.src(WORKING_DIRECTORY + 'index.php')
     .pipe(template(TEMPLATE_VM))
     .pipe(gulp.dest(DIST_PATH_ROOT));
@@ -99,14 +99,14 @@ gulp.task('build-index', function () {
 
 // =========== TEMPLATE TASKS
 
-gulp.task('clean-templates', function () {
+gulp.task('clean-templates', () => {
   return del([
     TEMPLATES_DIST_PATH + '**/*.html',
     TEMPLATES_DIST_PATH
   ]);
 });
 
-gulp.task('build-templates', ['clean-templates'], function () {
+gulp.task('build-templates', ['clean-templates'], () => {
   return gulp.src([
     WORKING_DIRECTORY + TEMPLATES_SRC_PATH + '**/*.html',
     WORKING_DIRECTORY + COMPONENTS_SRC_PATH + '**/*.html',
@@ -122,14 +122,14 @@ gulp.task('build-templates', ['clean-templates'], function () {
 
 // =========== IMAGE TASKS
 
-gulp.task('clean-images', function () {
+gulp.task('clean-images', () => {
   return del([
     IMAGE_DIST_PATH + '**/*',
     IMAGE_DIST_PATH
   ]);
 });
 
-gulp.task('build-images', ['clean-images'], function () {
+gulp.task('build-images', ['clean-images'], () => {
   return gulp.src(WORKING_DIRECTORY + IMAGE_SRC_PATH + '**/*')
     .pipe(gulp.dest(IMAGE_DIST_PATH));
 });
@@ -140,14 +140,14 @@ gulp.task('build-images', ['clean-images'], function () {
 
 // =========== SCRIPT TASKS
 
-gulp.task('clean-scripts', function () {
+gulp.task('clean-scripts', () => {
   return del([
     SCRIPTS_DIST_PATH + '**/*.php',
     '!' + SCRIPTS_DIST_PATH + 'index.php'
   ]);
 });
 
-gulp.task('build-scripts', ['clean-scripts'], function () {
+gulp.task('build-scripts', ['clean-scripts'], () => {
   return gulp.src(WORKING_DIRECTORY + SCRIPTS_SRC_PATH + '**/*')
     .pipe(gulp.dest(SCRIPTS_DIST_PATH));
 });
@@ -158,14 +158,14 @@ gulp.task('build-scripts', ['clean-scripts'], function () {
 
 // =========== JS TASKS
 
-gulp.task('clean-js', function () {
+gulp.task('clean-js', () => {
   return del([
     JS_DIST_PATH + '**/*.js',
     JS_DIST_PATH + '**'
   ])
 });
 
-gulp.task('build-js', ['clean-js'], function () {
+gulp.task('build-js', ['clean-js'], () => {
   return es.merge(
     gulp.src(_.filter(bowerFiles(), function (file) {
         return _.endsWith(path.basename(file), '.js');
@@ -179,7 +179,6 @@ gulp.task('build-js', ['clean-js'], function () {
       WORKING_DIRECTORY + COMPONENTS_SRC_PATH + '**/*.js',
       WORKING_DIRECTORY + VIEWS_SRC_PATH + '**/*.js'
     ])
-      //.pipe(babel())
       .pipe(angularify({
         root: 'app.js',
         module: 'mw.app',
@@ -189,24 +188,6 @@ gulp.task('build-js', ['clean-js'], function () {
           'ngScrollSpy'
         ]
       }))
-      //.pipe(webpack({
-      //  output: {
-      //    filename: 'app.js',
-      //  }
-      //}))
-      //.pipe(through2.obj(function (file, encoding, cb) {
-      //  return webpack({
-      //    entry: "./main.js",
-      //    output: {
-      //      filename: "bundle.js"
-      //    }
-      //  }, function(err, stats) {
-      //    err // => fatal compiler error (rar)
-      //    var json = stats.toJson() // => webpack --json
-      //    json.errors // => array of errors
-      //    json.warnings // => array of warnings
-      //  });
-      //}))
       .pipe(browserify({
         insertGlobals : true,
         debug : !argv.prod,
@@ -234,13 +215,13 @@ gulp.task('build-js', ['clean-js'], function () {
 
 // =========== CSS TASKS
 
-gulp.task('clean-css', function () {
+gulp.task('clean-css', () => {
   return del([
     CSS_DIST_PATH + '**/*.css'
   ])
 });
 
-gulp.task('build-css', ['clean-css'], function () {
+gulp.task('build-css', ['clean-css'], () => {
   return es.merge(
     gulp.src(_.filter(bowerFiles(), function (file) {
         return _.endsWith(path.basename(file), '.css');
@@ -273,25 +254,25 @@ gulp.task('build-css', ['clean-css'], function () {
 
 // =========== END CSS TASKS
 
-gulp.task('clean-deploy', function () {
+gulp.task('clean-deploy', () => {
   return del([
     DEPLOY_PATH_ROOT + BUILD_NAME + '.zip'
   ]);
 });
 
-gulp.task('build-deploy', ['clean-deploy'], function () {
+gulp.task('build-deploy', ['clean-deploy'], () => {
   return gulp.src(DIST_PATH_ROOT + '*/**')
     .pipe(zip(BUILD_NAME + '.zip'))
     .pipe(gulp.dest(DEPLOY_PATH_ROOT));
 });
 
-gulp.task('clean-link', function () {
+gulp.task('clean-link', () => {
   return del([
     WP_THEME_PATH
   ]);
 });
 
-gulp.task('build-link', ['clean-link'], function () {
+gulp.task('build-link', ['clean-link'], () => {
   return gulp.src(DIST_PATH_ROOT)
     .pipe(symlink(WP_THEME_PATH));
 });
@@ -302,11 +283,11 @@ gulp.task('clean-all', [
   'clean-images',
   'clean-scripts',
   'clean-templates'
-], function () {
+], () => {
   return del([DIST_PATH_ROOT]);
 });
 
-gulp.task('build-all', function () {
+gulp.task('build-all', () => {
   return sequence(
     [
       'build-js',
@@ -321,7 +302,7 @@ gulp.task('build-all', function () {
 
 gulp.task('build-app', ['build-all']);
 
-gulp.task('watch-all', ['build-all'], function () {
+gulp.task('watch-all', ['build-all'], () => {
   gulp.watch([
     WORKING_DIRECTORY + JS_SRC_PATH + '**/*.js',
     WORKING_DIRECTORY + COMPONENTS_SRC_PATH + '**/*.js',

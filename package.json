@@ -51,5 +51,9 @@
     "through2": "^2.0.0",
     "vinyl": "^1.1.0",
     "yargs": "^3.30.0"
+  },
+  "devDependencies": {
+    "del": "^2.2.0",
+    "gulp-flatten": "^0.2.0"
   }
 }

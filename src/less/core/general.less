@@ -1,0 +1,112 @@
+.bold {
+  font-weight: 700;
+}
+
+.normal {
+  font-weight: 400;
+}
+
+.light {
+  font-weight: 300;
+}
+
+.fine {
+  font-weight: 100;
+}
+
+html, body {
+  margin: 0;
+  padding: 0;
+
+  min-height: 100vh;
+
+  font-family: Lato, Helvetica, sans-serif;
+  font-weight: 400;
+
+  background-color: fadeout(@mw-color-swatch-2-dark-1, 15%);
+  background-image: @background-image;
+  background-attachment: fixed;
+  color: @mw-color-swatch-2-light-2;
+
+  font-smooth: always;
+  -webkit-font-smoothing: antialiased;
+  -webkit-text-stroke-width: .4px;
+}
+
+body .app-wrapper {
+  position: relative;
+  height: 100vh;
+
+  > .ps-scrollbar-y-rail {
+    right: @mw-sidebar-width + 5px;
+  }
+}
+
+h1, h2, h3, h4, h5, h6, p {
+  margin: 0;
+}
+
+h1, h2, h3 {
+  .bold
+}
+
+h1 {
+  font-size: 20px;
+}
+
+h2 {
+  font-size: 18px;
+}
+
+h3 {
+  font-size: 16px;
+}
+
+h4 {
+  font-size: 16px;
+  .light;
+}
+
+p {
+  font-size: 16px;
+  font-weight: 300;
+}
+
+a {
+  text-decoration: none;
+  color: inherit;
+}
+
+ul, ol, li {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+}
+
+li {
+  font-size: 16px;
+  white-space: nowrap;
+  width: 100%;
+  vertical-align: middle;
+  display: block;
+
+
+  .light;
+
+  a {
+    text-overflow: ellipsis;
+    overflow: hidden;
+    line-height: 1em;
+    height: 1em;
+    display: block;
+    cursor: pointer;
+    padding: 10px 0 10px 10px;
+  }
+}
+
+input[type=text] {
+  width: 100%;
+  &:focus {
+    outline-color: @mw-color-swatch-3-light-2;
+  }
+}

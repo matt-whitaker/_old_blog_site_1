@@ -1,0 +1,153 @@
+
+// Specificity is key
+.mw-page .mw-post {
+  @line-height: 1.5em;
+  @padding-left: .8em; 
+
+  h1, h2, h3, h4, p {
+    margin: 15px 0;
+    max-width: 100%;
+  }
+
+  h1 {
+    font-size: 20px;
+  }
+
+  h2 {
+    font-size: 18px;
+  }
+
+  h3 {
+    font-size: 18px;
+    .light;
+  }
+
+  p {
+    font-size: 16px;
+    line-height: @line-height;
+    text-indent: @padding-left;
+    max-width: 100%;
+  }
+
+  blockquote {
+    margin: 15px (@padding-left * 2.5);
+    line-height: @line-height;
+
+    .light;
+  }
+
+  ul, ol {
+    margin: 15px 0;
+    max-width: 100%;
+    padding-left: @padding-left;
+
+    ul, ol {
+      margin: 0;
+    }
+  }
+
+  li {
+    line-height: @line-height;
+
+    &:before {
+      content: "\2014";
+      margin-right: 5px;
+    }
+  }
+
+  dt {
+    line-height: @line-height;
+  }
+
+  dd {
+    padding-left: @padding-left;
+    line-height: @line-height;
+    margin: 0;
+    .light;
+  }
+
+  img {
+    border: 6px solid @mw-color-swatch-2-dark-1;
+    box-shadow: 1px 1px 3px 3px @mw-color-black;
+    max-width: 100%;
+    height: auto;
+
+    // From wordpress
+    &.alignright {float:right; margin:0 0 1em 1em}
+    &.alignleft {float:left; margin:0 1em 1em 0}
+    &.aligncenter {display: block; margin-left: auto; margin-right: auto}
+    a &.alignright {float:right; margin:0 0 1em 1em}
+    a &.alignleft {float:left; margin:0 1em 1em 0}
+    a &.aligncenter {display: block; margin-left: auto; margin-right: auto}
+  }
+
+  a {
+    cursor: pointer;
+    .mw-highlight-1;
+    color: fadeout(@mw-color-swatch-1-light-1, 20%);
+    //text-decoration: underline;
+    font-weight: 400;
+  }
+
+  pre {
+    overflow-x: auto;
+  }
+
+  table {
+    border-collapse: collapse;
+
+    thead {
+      tr {
+        th {
+          padding-bottom: 15px;
+        }
+      }
+    }
+
+    tbody {
+      tr {
+        padding: 0;
+        margin: 0;
+
+        td {
+          .light;
+        }
+
+        td, th {
+          padding: 5px 15px;
+          border: 1px solid @mw-color-white;
+          vertical-align: top;
+          border: 1px dotted fadeout(white, 50%);
+          
+          tr:first-child & {
+            border-top: none;
+          }
+
+          tr:last-child & {
+            border-bottom: none;
+          }
+
+          &:first-child {
+            border-left: none;
+          }
+
+          &:last-child {
+            border-right: none;
+          }
+        }
+
+        &:first-child {
+          td, th {
+            border-top: none;
+          } 
+        }
+
+        &:last-child {
+          td, th {
+            border-bottom: none;
+          } 
+        }
+      }
+    }
+  }
+}

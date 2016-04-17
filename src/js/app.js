@@ -2,14 +2,36 @@ angular.module('mw.app')
   .constant('apiBase', '/wp-json/wp/v2/')
   .constant('customApiBase', '/wp-json/dt/v1/')
   .constant('templatesBase', '/wp-content/themes/disjointedthinking/templates/')
-  .config(['$locationProvider', function ($locationProvider) {
+  .config(['$locationProvider', 'templatesBase', function ($locationProvider, templatesBase) {
     $locationProvider.html5Mode({
       enabled: true
     });
+
+    window.Dev = {};
   }])
-  .run(function () {
-    (window.onresize = function () {
-      var mainElem = document.getElementsByClassName('mw-main')[0];
-      mainElem.style.minHeight = document.documentElement.clientHeight + 'px';
-    })();
-  });
+  .run(['$rootScope', '$document', function ($rootScope, $document) {
+    let scrollingContainer = angular.element($document[0].body).children('div').first();
+
+    // configs
+    angular.extend($rootScope, {
+      toolbar: {
+        active: false
+      },
+      page: {
+
+      },
+      sidebar: {
+        active: true
+      }
+    });
+
+    $rootScope.toggleSidebar = function (toggle) {
+      $rootScope.sidebar.active = toggle;
+    };
+
+    scrollingContainer.perfectScrollbar();
+
+    $rootScope.$on('$stateChangeSuccess', () => {
+      scrollingContainer.scrollTop(0).perfectScrollbar('update');
+    });
+  }]);

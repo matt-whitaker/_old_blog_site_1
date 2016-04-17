@@ -1,13 +1,19 @@
 <?php
 
-
 ##### Get Archive #####
-function get_archive() {
-    function parse($item)
-    {
+function get_archive($data) {
+    function extract_excerpt ($content) {
+        $content = get_extended($content);
+        return $content;
+    }
+
+    function parse($item) {
+        $preview = extract_excerpt($item->content);
+
         return array(
             title       => $item->title,
             name        => $item->name,
+            excerpt     => $preview['main'],
             year        => intval($item->year),
             month       => intval($item->month),
             day         => intval($item->day)
@@ -18,13 +24,14 @@ function get_archive() {
     $results = $wpdb->get_results("
         SELECT  p.post_title title,
                 p.post_name name,
+                p.post_content content,
                 YEAR(p.post_date) year,
                 MONTH(p.post_date) month,
                 DAY(p.post_date) day
         FROM wp_posts p
-        WHERE p.post_type = 'post' AND p.post_status = 'publish'
+        WHERE p.post_type = 'post' AND p.post_status = 'publish' AND NOT p.post_password > ''
         ORDER BY year DESC, month DESC, day DESC
-    ", OBJECT );
+    ", OBJECT);
 
     return array_map('parse', $results);
 }

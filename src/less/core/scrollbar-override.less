@@ -1,0 +1,97 @@
+
+@ps-grey-light-plug: @mw-color-swatch-2-light-1;
+@ps-grey-xlight-plug: @mw-color-swatch-2-light-2;
+@ps-grey-dark-plug: @mw-color-swatch-2-1;
+
+/* copy / colors modified - perfect-scrollbar v0.6.8 */
+.ps-container {
+  -ms-touch-action: none;
+  overflow: hidden !important;
+}
+
+.ps-container.ps-active-x > .ps-scrollbar-x-rail,
+.ps-container.ps-active-y > .ps-scrollbar-y-rail {
+  display: block;
+}
+
+.ps-container.ps-in-scrolling {
+  pointer-events: none;
+}
+
+.ps-container.ps-in-scrolling.ps-x > .ps-scrollbar-x-rail {
+  background-color: @ps-grey-light-plug;
+  opacity: 0.9;
+}
+
+.ps-container.ps-in-scrolling.ps-x > .ps-scrollbar-x-rail > .ps-scrollbar-x {
+  background-color: @ps-grey-dark-plug;
+}
+
+.ps-container.ps-in-scrolling.ps-y > .ps-scrollbar-y-rail {
+  background-color: @ps-grey-light-plug;
+  opacity: 0.9;
+}
+
+.ps-container.ps-in-scrolling.ps-y > .ps-scrollbar-y-rail > .ps-scrollbar-y {
+  background-color: @ps-grey-dark-plug;
+}
+
+.ps-container > .ps-scrollbar-x-rail {
+
+}
+
+.ps-container > .ps-scrollbar-x-rail > .ps-scrollbar-x {
+
+}
+
+.ps-container > .ps-scrollbar-y-rail {
+
+}
+
+.ps-container > .ps-scrollbar-y-rail > .ps-scrollbar-y {
+  background-color: @ps-grey-xlight-plug;
+}
+
+.ps-container:hover.ps-in-scrolling {
+
+}
+
+.ps-container:hover.ps-in-scrolling.ps-x > .ps-scrollbar-x-rail {
+  background-color: @ps-grey-light-plug;
+  opacity: 0.9;
+}
+
+.ps-container:hover.ps-in-scrolling.ps-x > .ps-scrollbar-x-rail > .ps-scrollbar-x {
+  background-color: @ps-grey-dark-plug;
+}
+
+.ps-container:hover.ps-in-scrolling.ps-y > .ps-scrollbar-y-rail {
+  background-color: @ps-grey-light-plug;
+  opacity: 0.9;
+}
+.ps-container:hover.ps-in-scrolling.ps-y > .ps-scrollbar-y-rail > .ps-scrollbar-y {
+  background-color: @ps-grey-dark-plug;
+}
+
+.ps-container:hover > .ps-scrollbar-x-rail,
+.ps-container:hover > .ps-scrollbar-y-rail {
+  opacity: 0.6;
+}
+
+.ps-container:hover > .ps-scrollbar-x-rail:hover {
+  background-color: @ps-grey-light-plug;
+  opacity: 0.9;
+}
+
+.ps-container:hover > .ps-scrollbar-x-rail:hover > .ps-scrollbar-x {
+  background-color: @ps-grey-dark-plug;
+}
+
+.ps-container:hover > .ps-scrollbar-y-rail:hover {
+  background-color: @ps-grey-light-plug;
+  opacity: 0.9;
+}
+
+.ps-container:hover > .ps-scrollbar-y-rail:hover > .ps-scrollbar-y {
+  background-color: @ps-grey-dark-plug;
+}

@@ -1,11 +1,0 @@
-<div class="mw-spinner" ng-if="!loaded"></div>
-<a class="mw-listings" ui-sref="blog({ slug: listing.slug })" ng-repeat="listing in listings" ng-if="loaded">
-    <article> 
-        <header class="mw-listing-header"> 
-            <h1 class="mw-listing-title" ng-bind="listing.title"></h1> 
-            <time class="mw-listing-date">{{listing.date | prettyDate}}</time> 
-        </header> 
-        <main class="mw-listing-content" mw-bind-html="listing.excerpt"></main>
-        <!--<hr ng-if="!$last" ng-repeat-end/>-->
-    </article>
-</a>

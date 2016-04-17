@@ -1,9 +1,4 @@
-
-.mw-shadow {
-  box-shadow: 2px 2px 3px rgba(0, 0, 0, .8);
-}
-
-.no-select {
+.mw-no-select {
   -webkit-touch-callout: none;
   -webkit-user-select: none;
   -khtml-user-select: none;
@@ -12,11 +7,57 @@
   user-select: none;
 }
 
-.mw-well(@well) {
-  padding: 0 @well;
-}
-
-
 .mw-border-radius {
   border-radius: 2px 2px 2px 2px;
+}
+
+.mw-bg-highlight-1 {
+  transition: color 100ms linear, background-color 100ms linear;
+
+  &:hover {
+    color: @mw-color-white;
+    background-color: fadeout(@mw-color-swatch-1-light-2, 40%);
+  }
+}
+
+.mw-bg-highlight-2 {
+  transition: color 100ms linear, background-color 100ms linear;
+
+  &:hover {
+    color: @mw-color-white;
+    background-color: fadeout(@mw-color-swatch-2-light-2, 40%);
+  }
+}
+
+.mw-bg-highlight-3 {
+  transition: color 100ms linear, background-color 100ms linear;
+
+  &:hover {
+    color: @mw-color-white;
+    background-color: fadeout(@mw-color-swatch-3-light-2, 40%);
+  }
+}
+
+.mw-highlight-1 {
+  transition: color 100ms linear;
+
+  &:hover {
+    color: @mw-color-swatch-1-light-2;
+  }
+}
+
+.mw-highlight-2 {
+  transition: color 100ms linear;
+
+  &:hover {
+    color: @mw-color-swatch-2-light-1;
+  }
+}
+
+.mw-highlight-3 {
+  transition: color 100ms linear;
+
+  &:hover {
+    color: @mw-color-swatch-3-light-2;
+  }
 }

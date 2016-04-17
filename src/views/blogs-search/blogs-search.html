@@ -1,0 +1,35 @@
+<article class="mw-blogs-search" ng-if="!loading">
+    <header>
+        <div class="header-row">
+            <h1>Search</h1>
+        </div>
+        <div class="header-row search-overview">
+            <div ng-if="query">query: <span>{{ query }}</span></div>
+            <div ng-if="category">category: <span>{{ category }}</span></div>
+            <div ng-if="tags">tags: <span>{{ tags.join('') }}</span></div>
+        </div>
+    </header>
+    <main>
+        <section class="archi" ng-repeat="model in models">
+            <h2>{{ model.title }}&nbsp;</h2>
+            <div class="mw-post">
+                <div bind-html="model.excerpt" postprocess="postprocess"></div>
+                <a ui-sref="blog({ slug: model.name })">Read the rest</a>
+            </div>
+            <!--<div ng-if="tags" class="tags">-->
+                <!--<span>tags : </span>-->
+                <!--<span class="fa fa-tag delimiter" ng-if="$index" ng-repeat-start="tag in model.tags track by $index"></span>-->
+                <!--<span ng-class="{ highlighted: isHighlighted(tag) }" ng-repeat-end>{{ tag.title }}</span>-->
+            <!--</div>-->
+            <!--<div ng-if="category" class="categories">-->
+                <!--<span>category: </span>-->
+                <!--&lt;!&ndash; <span>{{ model.category.title }}</span> &ndash;&gt;-->
+                <!--<span class="fa fa-bookmark delimiter" ng-if="$index" ng-repeat-start="category in model.categories track by $index"></span>-->
+                <!--<span ng-class="{ highlighted: isHighlighted(category) }" ng-repeat-end>{{ category.title }}</span>-->
+            <!--</div>-->
+        </section>
+    </main>
+    <footer>
+
+    </footer>
+</article>

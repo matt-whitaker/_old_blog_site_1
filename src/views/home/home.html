@@ -1,0 +1,50 @@
+<div class="mw-home" ng-if="!loading">
+    <main class="mw-home-content">
+        <div class="home-sidebar">
+            <div class="avatar" >
+                <img src="/wp-content/themes/disjointedthinking/images/avatar.png" />
+            </div>
+            <div class="about-me">
+                <p>
+                    Matt Whitaker is a front-end and user experience enthusiast.
+                    He loves evangelizing the ever-changing web and engineering intuitive, beautiful interfaces.
+                </p>
+            </div>
+            <div class="category-cta">
+                <p>
+                    <strong>Let's talk about the web.</strong>
+                    <span>Checkout one of these categories to read my ramblings about web development, user experience, and visualizing information.</span>
+                </p>
+                <ul>
+                    <li><a ui-sref="search({ c: 'angular' })">Angular</a></li>
+                </ul>
+            </div>
+            <div class="category-cta disabled">
+                <p>
+                    <strong>Coming soon... </strong>
+                    <span>I will be posting reviews of various places and breweries I've visited, check back here in the future to see where I've been!</span>
+                </p>
+                <ul>
+                    <!--<li>Web Development</li>-->
+                </ul>
+            </div>
+        </div>
+        <div class="home-main">
+            <div class="home-banner">
+                <i class="fa fa-exclamation-triangle"></i>
+                This Wordpress theme is currently still in development, but deployed for testing and demoing purposes.
+                <!--I wrote this Wordpress theme from scratch! <a ui-sref="blog({ slug: 'angular-wordpress' })">See how I did it</a>!-->
+            </div>
+
+            <h1>Featured Post</h1>
+            <div ng-if="recent && recent[0]">
+                <h3>{{ recent[0].title }}</h3>
+                <time>{{ recent[0].moment | prettyDate }}</time>
+                <div class="mw-post">
+                    <div bind-html="recent[0].preview"></div>
+                    <a ui-sref="blog({ slug: recent[0].name })">Read the rest</a>
+                </div>
+            </div>
+        </div>
+    </main>
+</div>

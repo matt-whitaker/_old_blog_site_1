@@ -1,0 +1,20 @@
+
+.mw-page {
+  overflow: hidden;
+  display: block;
+  margin-left: 0;
+
+  margin-right: 0;
+  transition: margin-right 100ms linear;
+  .sidebar-active & {
+    margin-right: @mw-sidebar-width;
+  }
+
+  .container {
+    padding: 30px;
+  }
+
+  li {
+    white-space: normal;
+  }
+}

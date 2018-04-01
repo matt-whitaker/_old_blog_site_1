@@ -1,6 +1,6 @@
 # README #
 
-My personal blog and code playground.
+My (previous) personal blog and code playground.
 
 # Install #
 
